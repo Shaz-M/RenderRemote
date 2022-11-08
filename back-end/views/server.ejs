@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+    <title>Server</title>
+  </head>
+  <body>
+      <div class="container mt-5 mb-5">     
+        <h1>Server GUI</h1>
+
+        
+        
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="pills-entree-tab" data-bs-toggle="pill" data-bs-target="#pills-entree" type="button" role="tab" aria-controls="pills-entree" aria-selected="true" href="#pills-entree">Entrées</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="pills-side-tab" data-bs-toggle="pill" data-bs-target="#pills-side" type="button" role="tab" aria-controls="pills-side" aria-selected="false" href="#pills-side">Sides</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="pills-drink-tab" data-bs-toggle="pill" data-bs-target="#pills-drink" type="button" role="tab" aria-controls="pills-drink" aria-selected="false">Drinks</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-condiment-tab" data-bs-toggle="pill" data-bs-target="#pills-condiment" type="button" role="tab" aria-controls="pills-condiment" aria-selected="false">Condiments</button>
+              </li>
+          </ul>
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-entree" role="tabpanel" aria-labelledby="pills-entree-tab">
+                <% for (var i in entrees) {%>
+                    <button name="entreebtn" type="button" onclick="addItem(this)">
+                        <%=entrees[i].item_name%>
+                        <br>
+                        <%=entrees[i].price%>
+                    </button>  
+                <%}%>
+            </div>
+            <div class="tab-pane fade" id="pills-side" role="tabpanel" aria-labelledby="pills-side-tab">
+                <% for (var i in sides) {%>
+                    <button name="button" type="button" onclick="addItem(this)">
+                        <%=sides[i].item_name%>
+                        <br>
+                        <%=sides[i].price%>
+                    </button>  
+                <%}%>
+            </div>
+            <div class="tab-pane fade" id="pills-drink" role="tabpanel" aria-labelledby="pills-drink-tab">
+                <% for (var i in drinks) {%>
+                    <button name="button" type="button" onclick="addItem(this)">
+                        <%=drinks[i].item_name%>
+                        <br>
+                        <%=drinks[i].price%>
+                    </button>  
+                <%}%>
+            </div>
+            <div class="tab-pane fade" id="pills-condiment" role="tabpanel" aria-labelledby="pills-condiment-tab">
+                <% for (var i in condiments) {%>
+                    <button name="button" type="button" onclick="addItem(this)">
+                        <%=condiments[i].item_name%>
+                        <br>
+                        <%=condiments[i].price%>
+                    </button>  
+                <%}%>
+            </div>
+          </div>
+
+          <div id="order_box">
+            <div id=order_items></div>
+            <span>
+                ----------------------
+                <br/>
+                Order Total: $<span id="order_total">0.0</span></span>
+          </div>
+
+          <div>
+              <form method="post" action="/server">
+                <label for="cname">Customer Name:</label><br>
+                <input type="text" id="cname" name="cname"><br>
+                <input type="radio" id="Cash" name="payment_type" value="Cash">
+                <label for="Cash">Cash</label><br>
+                <input type="radio" id="Card" name="payment_type" value="Card">
+                <label for="Card">Card</label><br>
+                <input type="radio" id="Gift Card" name="payment_type" value="Gift Card">
+                <label for="Gift Card">Gift Card</label><br>
+                <input type="submit" value="Submit Order">
+              </form>
+          </div>
+
+
+          <script>
+              function addItem(element){
+                const str = element.innerText.trim();
+                const result = str.split(/\r?\n/);
+                let price = parseFloat(result[1]);
+                const item_name = result[0];
+
+                var order_total = document.getElementById('order_total')
+
+                let curr_total = parseFloat(order_total.innerText);
+                let total = curr_total+price;
+
+                var div = document.getElementById('order_items');
+                div.innerHTML+=item_name+" - "+price+"<br/>";
+                total = total.toFixed(2);
+                order_total.textContent = total;
+
+              }
+          </script>
+
+      </div>
+
+
+  </body>
+</html>
