@@ -26,6 +26,11 @@
     justify-content: center;
   
   }
+
+  .navbar .rightSide img {
+    width: 40px;
+    margin-right: 10px;
+  }
   
   .navbar a {
     color: white;

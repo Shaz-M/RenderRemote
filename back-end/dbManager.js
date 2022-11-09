@@ -19,7 +19,6 @@ async function queryDatabase(sql){
             for (let i = 0; i < query_res.rowCount; i++){
                 teammembers.push(query_res.rows[i]);
             }
-            console.log(teammembers);
         });
     return teammembers;
 }

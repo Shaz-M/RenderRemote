@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Logo from '../assests/Chick-fil-A-Logo.png'
+import Cart from '../assests/cart.png'
 import { Link } from "react-router-dom";
 import ReorderIcon from "@material-ui/icons/Reorder";
 import "../styles/Navbar.css";
@@ -26,7 +27,7 @@ function Navbar({ setShow, size }) {
         <Link to="/menu" onClick={() => setShow(true)}> Menu </Link>
         <Link to="/about"> About </Link>
         <Link to="/contact"> Contact </Link>
-        <div className="cart" onClick={() => setShow(false)}> Cart - {size}</div>
+        <div className="cart" onClick={() => setShow(false)}><img src={Cart} /> Cart - {size}</div>
         <button onClick={toggleNavbar}>
           <ReorderIcon />
         </button>

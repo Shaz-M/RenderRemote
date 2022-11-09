@@ -5,6 +5,8 @@ import OrderForm from "../components/OrderForm";
 const Cart = ({ cart }) => {
 
     var total = cart.reduce((sum,a) => sum+parseFloat(a.price),0);
+    total = total.toFixed(2);
+    total = parseFloat(total);
 
     const handleSubmit = async (event) =>{
         event.preventDefault();

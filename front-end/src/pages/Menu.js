@@ -4,8 +4,13 @@ import MenuItem from '../components/MenuItem';
 import { getMenuItems } from '../services/menuService';
 import '../styles/Menu.css';
 import { useEffect,useState } from "react";
+import Menu_Entrees from './Menu_Entrees';
+import { Link } from "react-router-dom";
 
 
+function myfunction() {
+  console.log("CLICKED");
+}
 function Menu({handleClick}) {
   const [menuItems, setMenuItems] = useState([]);
 
@@ -23,14 +28,30 @@ function Menu({handleClick}) {
       <div className='menu'>
           <h1 className='menuTitle'> Our Menu</h1>
           <div className='menuList'>
-            {menuItems.entrees.map(menuItem => {
-              return <MenuItem 
-              key={menuItem.item_id}
-              image={menuItem.image}
-              item={menuItem}
-              handleClick={handleClick}
-              />
-            })}
+            <div className='entree'>
+              <Link to="/menu/entrees">
+                <div className='entrees_b'>
+                <button> Entrees </button>
+                </div>
+              </Link>
+            </div>
+            <div className='side'>
+              <Link to="/menu/side">
+                <button> Side </button>
+              </Link>
+            </div>
+            <div className='drink'>
+              <Link to="/menu/drinks">
+                <button> Drinks </button>
+              </Link>
+            </div>
+            <div className='condiments'>
+              <Link to="/menu/condiments">
+                <button> Condiments </button>
+              </Link>
+            </div>
+
+            
           </div>
         
       </div>

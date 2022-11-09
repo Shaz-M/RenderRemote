@@ -19,6 +19,93 @@
     place-items: center;
   }
   
+  .entree{
+    width: 70vw;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+  }
+
+ .entrees_b button{
+    padding-left: 0%;
+    position: relative;
+    font-size: 40px;
+    width: 300px;
+    height: 200px;
+    grid-template-columns: 1fr 1fr 1fr;
+    color: black;
+    padding: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: none;
+    background-image: url(../assests/Entrees.png);
+  }
+
+  .side{
+    width: 70vw;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+  }
+  .side button{
+    padding-left: 0%;
+    position: relative;
+    font-size: 40px;
+    width: 300px;
+    height: 200px;
+    padding: 10px;
+    color: black;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: none;
+    background-image: url(../assests/sides.png);
+  }
+
+  .drink{
+    width: 70vw;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+  }
+
+  .drink button{
+    padding-left: 0%;
+    position: relative;
+    font-size: 40px;
+    width: 300px;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 200px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color: black;
+    border: none;
+    background-image: url(../assests/drinks.png);
+    
+  }
+  
+  .condiments{
+    width: 70vw;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+  }
+
+  .condiments button{
+    padding-left: 0%;
+    position: relative;
+    font-size: 40px;
+    width: 300px;
+    height: 200px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color: black;
+    border: none;
+    background-image: url(../assests/condiments.png);
+  }
   /* MENU ITEM STYLING */
   
   .menuItem {

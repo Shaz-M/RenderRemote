@@ -9,6 +9,17 @@ export async function getMenuItems(){
     }
 }
 
+export async function getInventoryItems(){
+
+    try{
+        const response = await fetch('http://localhost:5000/api/inventory');
+        return await response.json();
+    }
+    catch(error){
+        return [];
+    }
+}
+
 export async function submitOrder(firstname,lastname,payment_method,order_items,total){
 
     const response = await fetch('http://localhost:5000/api/submit_order',{
@@ -19,4 +30,29 @@ export async function submitOrder(firstname,lastname,payment_method,order_items,
     });
 
     return await response;
+}
+
+export async function addMenuItemQuery(item_name,quantity,price,food_type){
+    const response = await fetch('http://localhost:5000/api/submit_menuItem',{
+        method:'POST',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({item_name:item_name,quantity:quantity,price:price,food_type})
+    });
+
+    return await response;
+
+}
+
+
+export async function updateInventory(id,quantity){
+    const response = await fetch('http://localhost:5000/api/update_inventory',{
+        method:'POST',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({id:id,quantity:quantity})
+    });
+
+    return await response;
+
 }

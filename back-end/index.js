@@ -30,6 +30,7 @@ process.on('SIGINT', function() {
 });
 
 const bodyParser = require('body-parser');
+const { response } = require('express');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set("view engine", "ejs");
@@ -55,10 +56,109 @@ app.get('/api/menu_items', async (req,res) => {
     res.json(data);
 });
 
+app.get('/api/inventory', async (req,res) => {
+    inventory = await dbs.queryDatabase("SELECT * FROM inventories;");
+
+    const data = {inventory:inventory};
+    res.json(data);
+});
+
+
+
+app.post('/api/submit_menuItem',async (req,res) =>{
+    console.log(req.body);
+    item_ID = Math.floor(Math.random() * 800000000);
+
+    let sql = "INSERT INTO menu_items VALUES('"+item_ID+"','"+req.body.item_name+"','"+req.body.quantity+"','"+req.body.price+"','"+req.body.food_type+"');";
+    await dbs.queryDatabase(sql);
+    res.end();
+});
+
+app.post('/api/update_inventory',async (req,res) =>{
+    console.log(req.body);
+    id = req.body.id;
+    quantity = req.body.quantity;
+
+    let sql = "UPDATE inventories SET inventory_quantity='"+quantity+"'WHERE inventory_id='"+id+"';"
+    await dbs.queryDatabase(sql);
+    res.end();
+
+});
+
 app.post('/api/submit_order', async (req,res) =>{
     
     console.log("SERVER RECIEVED");
     console.log(req.body);
+    fname = req.body.firstname;
+    lname = req.body.lastname;
+    total = req.body.total;
+    payment_type = req.body.payment_method;
+    customer_UID = Math.floor(Math.random() * 800000000);
+    order_UID = Math.floor(Math.random() * 800000000);
+    date = new Date().toISOString().slice(0, 10);
+    order_items = req.body.order_items;
+    sales_UID = 0;
+    
+    // TODO: implement sales connection
+
+    // add customer info into customers table
+    let sql = "INSERT INTO customer VALUES('"+customer_UID+"','"+fname+"','"+lname+"','"+payment_type+"');";
+
+    await dbs.queryDatabase(sql);
+
+    // add order to database
+    sql = "INSERT INTO orders_cfa VALUES('"+order_UID+"','"+date+"','"+customer_UID+"','"+total+"','"+sales_UID+"');";
+
+    await dbs.queryDatabase(sql);
+
+    // add order_menu mapping to database
+
+    for (const item of order_items) {
+        sql = "INSERT INTO order_menu VALUES('"+order_UID+"','"+item.item_id+"');";
+        await dbs.queryDatabase(sql);
+    }
+
+    // update inventory after order in database
+
+    var inventory_hash = new Map();
+
+    for(const item of order_items){
+
+        sql = "SELECT inventory_id FROM items_inventories WHERE item_id='"+item.item_id+"';";
+        let response = await dbs.queryDatabase(sql);
+
+    
+        // for each inventory item check if its in hash map if it is decrement otherwise query and add
+        for(const val of response){
+            if(inventory_hash.has(val.inventory_id)){
+                console.log(val.inventory_id);
+                inventory_hash.set(val.inventory_id,inventory_hash.get(val.inventory_id)-1);
+            }
+            else{
+                sql = "SELECT inventory_quantity FROM inventories WHERE inventory_id='"+val.inventory_id+"';";
+                let res = await dbs.queryDatabase(sql);
+                console.log(val.inventory_id+" "+res[0].inventory_quantity);
+                inventory_hash.set(val.inventory_id,parseInt(res[0].inventory_quantity)-1);
+            }
+        }
+
+
+    }
+
+    //iterate through inventory map and update values in database
+
+    for (var [key, value] of inventory_hash){
+        sql = "UPDATE inventories SET inventory_quantity='"+value+"'WHERE inventory_id='"+key+"';";
+        await dbs.queryDatabase(sql);
+    }
+
+
+
+    // TODO add order to sales
+
+
+
+
     res.end();
 
     

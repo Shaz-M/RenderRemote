@@ -7,11 +7,11 @@ function OrderForm({handleSubmit}){
             <input type="text" id="fname" name="fname"/><br/>
             <label for="lname">Last name:</label><br/>
             <input type="text" id="lname" name="lname"/><br/>
-            <input type="radio" id="card" name="payment_type" value="Card"/>
+            <input type="radio" id="card" name="payment_type" value="card"/>
             <label for="card">Card</label><br/>
-            <input type="radio" id="cash" name="payment_type" value="Cash"/>
+            <input type="radio" id="cash" name="payment_type" value="cash"/>
             <label for="cash">Cash</label><br/>
-            <input type="radio" id="gc" name="payment_type" value="Gift Card"/>
+            <input type="radio" id="gc" name="payment_type" value="giftcard"/>
             <label for="gc">Gift Card</label><br/>
             <input type="submit" value="Submit"></input>
         </form>
