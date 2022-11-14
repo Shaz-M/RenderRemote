@@ -169,7 +169,7 @@ app.get('/api/restock_report', async (req,res) => {
 app.post('/api/sales_together', async (req,res) => {
     start = req.body.start;
     end = req.body.end;
-    sql = "SELECT DISTINCT GREATEST(a.item_id, b.item_id), LEAST(a.item_id, b.item_id), count(*) as times_bought_together FROM order_menu AS a INNER JOIN order_menu AS b ON a.order_id = b.order_id JOIN orders_cfa p ON a.order_id = p.order_id AND b.order_id=p.order_id WHERE p.order_date between "+start+" AND "+end+" AND a.item_id != b.item_id GROUP BY a.item_id,b.item_id ORDER BY count(*) DESC Limit 15;";
+    sql = "SELECT DISTINCT GREATEST(a.item_id, b.item_id), LEAST(a.item_id, b.item_id), count(*) as times_bought_together FROM order_menu AS a INNER JOIN order_menu AS b ON a.order_id = b.order_id JOIN orders_cfa p ON a.order_id = p.order_id AND b.order_id=p.order_id WHERE p.order_date between '"+start+"' AND '"+end+"' AND a.item_id != b.item_id GROUP BY a.item_id,b.item_id ORDER BY count(*) DESC Limit 15;";
     value = await dbs.queryDatabase(sql);
 
     const data = {sales_together:value};

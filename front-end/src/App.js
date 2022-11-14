@@ -12,6 +12,7 @@ import Manager from './pages/Manager';
 import ManagerNavbar from './components/ManagerNavbar';
 import Manager_Menu from './pages/Manager_Menu';
 import Manager_Inventory from './pages/Manager_Inventory';
+import Manager_Sales from './pages/Manager_Sales';
 import React, { useState, useEffect } from "react";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
       <Route path='/manager' exact element={<Manager setManagerNav={setManagerNav} />} />
       <Route path='/manager/menu_items' exact element={<Manager_Menu setManagerNav={setManagerNav} />} />
       <Route path='/manager/inventory' exact element={<Manager_Inventory setManagerNav={setManagerNav} />} />
+      <Route path='/manager/sales' exact element={<Manager_Sales setManagerNav={setManagerNav} />} />
       <Route path='/menu' exact element={show? (<Menu handleClick={handleClick}/>):(<Cart cart={cart} />)} />
       <Route path='/menu/entrees' exact element={show? (<Menu_Entrees handleClick={handleClick}/>):(<Cart cart={cart} />)} />
       <Route path='/menu/side' exact element={show? (<Menu_Side handleClick={handleClick}/>):(<Cart cart={cart} />)} />

@@ -56,3 +56,15 @@ export async function updateInventory(id,quantity){
     return await response;
 
 }
+
+export async function getSalesReport(start,end){
+    const response = await fetch('http://localhost:5000/api/sales_report',{
+        method:'POST',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({start:start,end:end})
+    });
+
+    return await response.json();
+
+}
