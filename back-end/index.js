@@ -177,7 +177,7 @@ app.post('/api/sales_together', async (req,res) => {
 });
 
 
-app.get('/api/excess_report', async (req,res) => {
+app.post('/api/excess_report', async (req,res) => {
     date = req.body.date;
     sql = "SELECT o.inventory_id,count(o.inventory_id) FROM items_inventories o JOIN menu_items m ON o.item_id = m.item_id JOIN order_menu t ON t.item_id = m.item_id JOIN orders_cfa p ON t.order_id = p.order_id WHERE p.order_date > '"+date+"' GROUP BY o.inventory_id;";
     
@@ -205,6 +205,15 @@ app.get('/api/excess_report', async (req,res) => {
     res.send(JSON.stringify(data));
 });
 
+app.post('/api/sales_report', async (req,res) => {
+    start = req.body.start;
+    end = req.body.end;
+    sql = "SELECT m.item_name,count(m.item_name) FROM order_menu o JOIN menu_items m ON o.item_id = m.item_id JOIN orders_cfa p ON o.order_id = p.order_id WHERE p.order_date BETWEEN '"+start+"' AND '"+end+"' GROUP BY m.item_name;";
+    value = await dbs.queryDatabase(sql);
+
+    const data = {sales_report:value};
+    res.send(JSON.stringify(data));
+});
 
 
 
