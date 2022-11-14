@@ -40,12 +40,6 @@ app.get('/', (req, res) => {
     res.render('index', data);
 });
 
-app.get('/manager', async (req, res) =>  {
-    result = await dbs.queryDatabase('SELECT * FROM teammembers;');
-    const data = {teammembers: result};
-    res.render('manager', data);       
-});
-
 app.get('/api/menu_items', async (req,res) => {
     entrees = await dbs.queryDatabase("SELECT * FROM menu_items where food_type='Entrée';");
     sides = await dbs.queryDatabase("SELECT * FROM menu_items where food_type='Side';");
@@ -163,6 +157,25 @@ app.post('/api/submit_order', async (req,res) =>{
 
     
 });
+
+app.get('/api/restock', async (req,res) => {
+    restock = await dbs.queryDatabase("SELECT * FROM inventories where inventory_quantity < 50;");
+
+    const data = {restock:restock};
+    res.json(data);
+});
+
+
+app.post('/api/sales_together', async (req,res) => {
+    start = req.body.start;
+    end = req.body.end;
+    sql = "SELECT DISTINCT GREATEST(a.item_id, b.item_id), LEAST(a.item_id, b.item_id), count(*) as times_bought_together FROM order_menu AS a INNER JOIN order_menu AS b ON a.order_id = b.order_id JOIN orders_cfa p ON a.order_id = p.order_id AND b.order_id=p.order_id WHERE p.order_date between "+start+" AND "+end+" AND a.item_id != b.item_id GROUP BY a.item_id,b.item_id ORDER BY count(*) DESC Limit 15;";
+    value = await dbs.queryDatabase(sql);
+
+    const data = {sales_together:value};
+    res.send(data);
+});
+
 
 
 
