@@ -171,8 +171,23 @@ app.post('/api/sales_together', async (req,res) => {
     end = req.body.end;
     sql = "SELECT DISTINCT GREATEST(a.item_id, b.item_id), LEAST(a.item_id, b.item_id), count(*) as times_bought_together FROM order_menu AS a INNER JOIN order_menu AS b ON a.order_id = b.order_id JOIN orders_cfa p ON a.order_id = p.order_id AND b.order_id=p.order_id WHERE p.order_date between '"+start+"' AND '"+end+"' AND a.item_id != b.item_id GROUP BY a.item_id,b.item_id ORDER BY count(*) DESC Limit 15;";
     value = await dbs.queryDatabase(sql);
+    sales = [];
 
-    const data = {sales_together:value};
+    for(const element of value){
+        let sql2 = "SELECT item_name from menu_items where item_id='"+element.greatest+"'";
+        let temp = await dbs.queryDatabase(sql2);
+        name1 = temp[0].item_name;
+        sql2 = "SELECT item_name from menu_items where item_id='"+element.least+"'";
+        temp = await dbs.queryDatabase(sql2);
+        name2 = temp[0].item_name;
+
+        obj = {item1:name1, item2:name2, count:element.times_bought_together};
+        sales.push(obj);
+
+
+    }
+
+    const data = {sales_together:sales};
     res.send(data);
 });
 

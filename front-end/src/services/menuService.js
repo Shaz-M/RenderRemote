@@ -91,3 +91,15 @@ export async function getRestockReport(){
         return [];
     }
 }
+
+export async function getSalesTog(start,end){
+    const response = await fetch('http://localhost:5000/api/sales_together',{
+        method:'POST',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({start:start,end:end})
+    });
+
+    return await response.json();
+
+}

@@ -16,6 +16,7 @@ import Manager_Sales from './pages/Manager_Sales';
 import React, { useState, useEffect } from "react";
 import Manager_Excess from './pages/Manager_Excess';
 import Manager_Restock from './pages/Manager_Restock';
+import Manager_SalesTog from './pages/Manager_SalesTog';
 
 function App() {
   const [show, setShow] = useState(true);
@@ -39,6 +40,7 @@ function App() {
       <Route path='/manager/sales' exact element={<Manager_Sales setManagerNav={setManagerNav} />} />
       <Route path='/manager/excess' exact element={<Manager_Excess setManagerNav={setManagerNav} />} />
       <Route path='/manager/restock' exact element={<Manager_Restock setManagerNav={setManagerNav} />} />
+      <Route path='/manager/sales_together' exact element={<Manager_SalesTog setManagerNav={setManagerNav} />} />
       <Route path='/menu' exact element={show? (<Menu handleClick={handleClick}/>):(<Cart cart={cart} />)} />
       <Route path='/menu/entrees' exact element={show? (<Menu_Entrees handleClick={handleClick}/>):(<Cart cart={cart} />)} />
       <Route path='/menu/side' exact element={show? (<Menu_Side handleClick={handleClick}/>):(<Cart cart={cart} />)} />
