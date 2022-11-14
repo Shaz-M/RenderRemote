@@ -161,7 +161,7 @@ app.post('/api/submit_order', async (req,res) =>{
 app.get('/api/restock_report', async (req,res) => {
     restock = await dbs.queryDatabase("SELECT * FROM inventories where inventory_quantity < 50;");
 
-    const data = {restock:restock};
+    const data = {restock_report:restock};
     res.json(data);
 });
 
@@ -201,7 +201,7 @@ app.post('/api/excess_report', async (req,res) => {
          console.log(percent);
          
     }
-    const data = {excess:excess};
+    const data = {excess_report:excess};
     res.send(JSON.stringify(data));
 });
 

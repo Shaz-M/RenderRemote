@@ -68,3 +68,15 @@ export async function getSalesReport(start,end){
     return await response.json();
 
 }
+
+export async function getExcessReport(date){
+    const response = await fetch('http://localhost:5000/api/excess_report',{
+        method:'POST',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({date:date})
+    });
+
+    return await response.json();
+
+}
