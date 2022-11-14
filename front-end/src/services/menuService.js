@@ -80,3 +80,14 @@ export async function getExcessReport(date){
     return await response.json();
 
 }
+
+export async function getRestockReport(){
+
+    try{
+        const response = await fetch('http://localhost:5000/api/restock_report');
+        return await response.json();
+    }
+    catch(error){
+        return [];
+    }
+}

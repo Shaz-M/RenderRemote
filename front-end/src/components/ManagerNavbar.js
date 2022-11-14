@@ -28,6 +28,8 @@ function ManagerNavbar({ setManagerNav }) {
         <Link to="/manager/menu_items"> Menu Items </Link>
         <Link to="/manager/inventory"> Inventory </Link>
         <Link to="/manager/excess"> Excess </Link>
+        <Link to="/manager/sales_together"> Sales Together </Link>
+        <Link to="/manager/restock"> Restock </Link>
         <button onClick={toggleNavbar}>
           <ReorderIcon />
         </button>
