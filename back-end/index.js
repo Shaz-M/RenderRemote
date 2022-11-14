@@ -158,7 +158,7 @@ app.post('/api/submit_order', async (req,res) =>{
     
 });
 
-app.get('/api/restock', async (req,res) => {
+app.get('/api/restock_report', async (req,res) => {
     restock = await dbs.queryDatabase("SELECT * FROM inventories where inventory_quantity < 50;");
 
     const data = {restock:restock};
@@ -175,6 +175,37 @@ app.post('/api/sales_together', async (req,res) => {
     const data = {sales_together:value};
     res.send(data);
 });
+
+
+app.get('/api/excess_report', async (req,res) => {
+    date = req.body.date;
+    sql = "SELECT o.inventory_id,count(o.inventory_id) FROM items_inventories o JOIN menu_items m ON o.item_id = m.item_id JOIN order_menu t ON t.item_id = m.item_id JOIN orders_cfa p ON t.order_id = p.order_id WHERE p.order_date > '"+date+"' GROUP BY o.inventory_id;";
+    
+    excess = [];
+    value = await dbs.queryDatabase(sql);
+    for(const element of value){
+        let total_sold = parseInt(element.count);
+         sql2 = "SELECT * from inventories where inventory_id="+element.inventory_id;   
+         item = await dbs.queryDatabase(sql2);
+         curr_quantity = parseInt(item[0].inventory_quantity);
+         item_name = item[0].inventory_name;
+
+         let percent = total_sold/(total_sold+curr_quantity);
+
+         if(percent<0.1){
+            obj = {item_name:item_name, total_sold:total_sold, current_quantity:curr_quantity};
+            excess.push(obj);
+
+         }
+
+         console.log(percent);
+         
+    }
+    const data = {excess:excess};
+    res.send(JSON.stringify(data));
+});
+
+
 
 
 
