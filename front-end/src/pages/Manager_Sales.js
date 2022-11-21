@@ -22,6 +22,7 @@ function Manager_Sales({setManagerNav}) {
 
     return (
         <div>
+
             {sales.sales_report.map((item,index) => {
                 
                     return (
@@ -41,6 +42,12 @@ function Manager_Sales({setManagerNav}) {
 
   return (
     <div>
+      <div className='menu'>
+            <center> 
+                <h1 className='menuTitle'> Sales </h1> 
+                List of Items and Amount Sold
+            </center>
+      </div>
       <ReportQueryForm handleSubmit={handleSubmit} />
     </div>
   )

@@ -21,6 +21,12 @@ const Cart = ({ cart }) => {
 
     return(
     <div>
+        <div className='menu'>
+            <center> 
+                <h1 className='menuTitle'> Your Cart </h1> 
+            </center>
+        </div>
+
         {cart.map((item,index) => (
                 <div key={index}>
                     {item.item_name} - {item.price}

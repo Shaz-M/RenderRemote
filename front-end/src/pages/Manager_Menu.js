@@ -30,6 +30,11 @@ function Manager_Menu({setManagerNav}) {
 
     return (
         <div>
+          <div className='menu'>
+              <center> 
+                  <h1 className='menuTitle'> Menu Items </h1> 
+              </center>
+          </div>
             {menuItems.condiments.map(menuItem => {
                 
                     return <div>{menuItem.item_name} - {menuItem.quantity_left}</div>

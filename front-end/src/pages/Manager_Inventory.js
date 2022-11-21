@@ -29,6 +29,12 @@ function Manager_Inventory({setManagerNav}) {
 
     return (
         <div>
+          <div className='menu'>
+              <center> 
+                  <h1 className='menuTitle'> Inventory Items </h1> 
+              </center>
+          </div>
+
             {inventory.inventory.map(item => {
                 
                     return (

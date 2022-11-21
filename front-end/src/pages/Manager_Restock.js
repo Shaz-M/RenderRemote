@@ -18,6 +18,12 @@ function Manager_Restock({setManagerNav}) {
 
     return (
         <div>
+          <div className='menu'>
+              <center> 
+                  <h1 className='menuTitle'> Restock Report </h1> 
+                  Items that need to be Restocked and their Quantity
+              </center>
+          </div>
             {restock.restock_report.map((item,index) => {
                 
                     return (

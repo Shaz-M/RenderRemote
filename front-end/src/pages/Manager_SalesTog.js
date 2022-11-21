@@ -22,6 +22,7 @@ function Manager_SalesTog({setManagerNav}) {
 
     return (
         <div>
+          
             {together.sales_together.map((item,index) => {
                 
                     return (
@@ -41,6 +42,12 @@ function Manager_SalesTog({setManagerNav}) {
 
   return (
     <div>
+      <div className='menu'>
+            <center> 
+                <h1 className='menuTitle'> Sales Together </h1> 
+                Items Sold in Pairs and their Frequency Sold Together
+            </center>
+      </div>
       <ReportQueryForm handleSubmit={handleSubmit} />
     </div>
   )

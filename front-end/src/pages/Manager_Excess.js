@@ -21,6 +21,7 @@ function Manager_Excess({setManagerNav}) {
 
     return (
         <div>
+
             {excess.excess_report.map((item,index) => {
                 
                     return (
@@ -47,6 +48,15 @@ function Manager_Excess({setManagerNav}) {
   return (
     <div>
         <form onSubmit={handleSubmit}>
+            <div className='menu'>
+                <center> 
+                    <h1 className='menuTitle'> Excess Report </h1> 
+                    Items in Excess
+                </center>
+            </div>
+            Format: <br/>
+            Item Name | Total Sold | Current Quantity <br/><br/>
+
             <label for="date">Start Date:</label><br/>
             <input type="text" id="date" name="date" placeholder="YYYY-MM-DD"/><br/>
             <input type="submit" value="Submit"></input>
