@@ -17,17 +17,18 @@ import React, { useState, useEffect } from "react";
 import Manager_Excess from './pages/Manager_Excess';
 import Manager_Restock from './pages/Manager_Restock';
 import Manager_SalesTog from './pages/Manager_SalesTog';
+import Locations from './pages/Locations';
 
 function App() {
   const [show, setShow] = useState(true);
   const [cart, setCart] = useState([]);
   const [managerNav, setManagerNav] = useState(false);
+  
 
   const handleClick = (item) => {
     console.log("here");
     setCart([...cart, item]);
   };
-  console.log(managerNav);
 
   return <div className="App">
     <Router>
@@ -46,6 +47,7 @@ function App() {
       <Route path='/menu/side' exact element={show? (<Menu_Side handleClick={handleClick}/>):(<Cart cart={cart} />)} />
       <Route path='/menu/drinks' exact element={show? (<Menu_Drink handleClick={handleClick}/>):(<Cart cart={cart} />)} />
       <Route path='/menu/condiments' exact element={show? (<Menu_Condiments handleClick={handleClick}/>):(<Cart cart={cart} />)} />
+      <Route path='/locations' exact element={<Locations />} />
 
 
 
