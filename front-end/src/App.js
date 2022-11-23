@@ -28,7 +28,7 @@ function App() {
   const countItem = (item2) => {
     console.log("here2");
 
-    const array = cart.filter(item => item === item2);
+    const array = cart.filter(item => item.item_name === item2.item_name);
     const count = array.length;
     return count;
   };
@@ -43,7 +43,7 @@ function App() {
 
     
     var array = [...cart]; // make a separate copy of the array
-    var index = array.indexOf(item)
+    var index = array.map(function(e){return e.item_name;}).indexOf(item.item_name);
     if (index !== -1) {
       array.splice(index, 1);
       setCart(array);

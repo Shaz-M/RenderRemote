@@ -30,24 +30,22 @@ function Menu({handleClick}) {
           <div className='menuList'>
             <div className='entree'>
               <Link to="/menu/entrees">
-                <div className='entrees_b'>
-                <button> Entrees </button>
-                </div>
+                  <button className='entree_button'> Entrees </button>
               </Link>
             </div>
             <div className='side'>
               <Link to="/menu/side">
-                <button> Side </button>
+                <button className='side_button'> Side </button>
               </Link>
             </div>
             <div className='drink'>
               <Link to="/menu/drinks">
-                <button> Drinks </button>
+                <button className='drink_button'> Drinks </button>
               </Link>
             </div>
             <div className='condiments'>
               <Link to="/menu/condiments">
-                <button> Condiments </button>
+                <button className='condiment_button'> Condiments </button>
               </Link>
             </div>
 
