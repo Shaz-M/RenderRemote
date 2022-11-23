@@ -3,6 +3,7 @@ import MenuItem from '../components/MenuItem';
 import { getMenuItems } from '../services/menuService';
 import '../styles/Menu.css';
 import { useEffect,useState } from "react";
+import {MenuList} from "../helpers/MenuList"
 
 
 function Menu_Entrees({handleClick, remove, countItem}) {
@@ -15,6 +16,17 @@ function Menu_Entrees({handleClick, remove, countItem}) {
 
   },[])
 
+  function images_entrees(item_id){
+    //console.log("yes");
+    for(let obj in MenuList){
+      //console.log(typeof MenuList[obj].id + " "  + typeof item_id.toString());
+      if(MenuList[obj].id == item_id.toString()){
+        //console.log("goes inside");
+        return MenuList[obj].image;
+      }
+    }
+  }
+
 
   if(menuItems.length!==0){
 
@@ -26,7 +38,7 @@ function Menu_Entrees({handleClick, remove, countItem}) {
               {menuItems.entrees.map(menuItem => {
                 return <MenuItem 
                 key={menuItem.item_id}
-                image={menuItem.image}
+                image={images_entrees(menuItem.item_id)}
                 item={menuItem}
                 handleClick={handleClick}
                 remove={remove}

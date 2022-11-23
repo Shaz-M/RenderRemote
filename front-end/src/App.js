@@ -26,7 +26,7 @@ function App() {
   
 
   const countItem = (item2) => {
-    console.log("here2");
+    //console.log("here2");
 
     const array = cart.filter(item => item === item2);
     const count = array.length;
