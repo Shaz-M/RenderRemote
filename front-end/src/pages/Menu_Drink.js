@@ -32,10 +32,10 @@ function Menu_Drink({handleClick, remove, countItem}) {
 
     return (
       <div className='menu'>
-          <h1 className='menuTitle'> Entrees</h1>
+          <h1 className='menuTitle'> Drinks</h1>
           <div className='menuList'>
             <div className='drink'>
-              {menuItems.entrees.map(menuItem => {
+              {menuItems.drinks.map(menuItem => {
                 return <MenuItem 
                 key={menuItem.item_id}
                 image={images_drinks(menuItem.item_id)}
