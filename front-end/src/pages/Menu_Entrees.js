@@ -1,12 +1,11 @@
 import React from 'react'
-import { MenuList } from '../helpers/MenuList'
 import MenuItem from '../components/MenuItem';
 import { getMenuItems } from '../services/menuService';
 import '../styles/Menu.css';
 import { useEffect,useState } from "react";
 
 
-function Menu_Entrees({handleClick}) {
+function Menu_Entrees({handleClick, remove, countItem}) {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
@@ -30,6 +29,8 @@ function Menu_Entrees({handleClick}) {
                 image={menuItem.image}
                 item={menuItem}
                 handleClick={handleClick}
+                remove={remove}
+                countItem={countItem}
                 />
               })}
             </div>
