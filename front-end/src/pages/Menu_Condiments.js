@@ -6,7 +6,7 @@ import '../styles/Menu.css';
 import { useEffect,useState } from "react";
 
 
-function Menu_Condiments({handleClick}) {
+function Menu_Condiments({handleClick, remove, countItem}) {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
@@ -31,6 +31,8 @@ function Menu_Condiments({handleClick}) {
                   image={null}
                   item={menuItem}
                   handleClick={handleClick}
+                  remove={remove}
+                  countItem={countItem}
                   />
                 })}
             </div>
