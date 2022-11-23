@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { submitOrder } from "../services/menuService";
 import OrderForm from "../components/OrderForm";
+import GoogleTranslate from "../components/GoogleTranslate"
 
 const Cart = ({ cart }) => {
 
