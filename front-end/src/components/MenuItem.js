@@ -7,9 +7,9 @@ function MenuItem({ image,item,handleClick, remove, countItem}) {
       <h1> {item.item_name} </h1>
       <p> ${item.price} </p>
 
-      <button onClick={() => remove(item)}>Remove from Cart</button>
-      Quantity: {countItem(item)}
       <button onClick={() => handleClick(item)}>Add to Cart</button>
+      Quantity: {countItem(item)}
+      <button onClick={() => remove(item)}>Remove from Cart</button>
     </div>
   );
 }

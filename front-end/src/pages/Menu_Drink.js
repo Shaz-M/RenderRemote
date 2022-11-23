@@ -6,7 +6,7 @@ import '../styles/Menu.css';
 import { useEffect,useState } from "react";
 
 
-function Menu_Drink({handleClick}) {
+function Menu_Drink({handleClick, remove, countItem}) {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
@@ -31,6 +31,8 @@ function Menu_Drink({handleClick}) {
                   image={null}
                   item={menuItem}
                   handleClick={handleClick}
+                  remove={remove}
+                  countItem={countItem}
                   />
                 })}
             </div>
