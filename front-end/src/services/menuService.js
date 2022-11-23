@@ -103,3 +103,16 @@ export async function getSalesTog(start,end){
     return await response.json();
 
 }
+
+export async function getNearbyLocations(lat,lng){
+    console.log(lat);
+    const response = await fetch('http://localhost:5000/api/locations',{
+        method:'POST',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({lat:lat,lng:lng})
+    });
+
+    return await response.json();
+
+}

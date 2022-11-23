@@ -18,7 +18,6 @@ function Manager_Inventory({setManagerNav}) {
 
     const handleSubmit = async (event) =>{
         event.preventDefault();
-        console.log(event.target);
         let id = event.target.id.value;
         let quantity = event.target.quantity.value;
         let response = await updateInventory(id,quantity);

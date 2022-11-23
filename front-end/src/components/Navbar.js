@@ -27,6 +27,7 @@ function Navbar({ setShow, size }) {
         <Link to="/menu" onClick={() => setShow(true)}> Menu </Link>
         <Link to="/about"> About </Link>
         <Link to="/contact"> Contact </Link>
+        <Link to="/locations"> Locations </Link>
         <div className="cart" onClick={() => setShow(false)}><img src={Cart} /> Cart - {size}</div>
         <button onClick={toggleNavbar}>
           <ReorderIcon />
