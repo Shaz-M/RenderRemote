@@ -28,7 +28,7 @@ function App() {
   const countItem = (item2) => {
     //console.log("here2");
 
-    const array = cart.filter(item => item === item2);
+    const array = cart.filter(item => item.item_name === item2.item_name);
     const count = array.length;
     return count;
   };
@@ -43,7 +43,7 @@ function App() {
 
     
     var array = [...cart]; // make a separate copy of the array
-    var index = array.indexOf(item)
+    var index = array.map(function(e){return e.item_name;}).indexOf(item.item_name);
     if (index !== -1) {
       array.splice(index, 1);
       setCart(array);
@@ -64,9 +64,9 @@ function App() {
       <Route path='/manager/sales_together' exact element={<Manager_SalesTog setManagerNav={setManagerNav} />} />
       <Route path='/menu' exact element={show? (<Menu handleClick={handleClick}/>):(<Cart cart={cart} />)} />
       <Route path='/menu/entrees' exact element={show? (<Menu_Entrees handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} />)} />
-      <Route path='/menu/side' exact element={show? (<Menu_Side handleClick={handleClick}/>):(<Cart cart={cart} />)} />
-      <Route path='/menu/drinks' exact element={show? (<Menu_Drink handleClick={handleClick}/>):(<Cart cart={cart} />)} />
-      <Route path='/menu/condiments' exact element={show? (<Menu_Condiments handleClick={handleClick}/>):(<Cart cart={cart} />)} />
+      <Route path='/menu/side' exact element={show? (<Menu_Side handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} />)} />
+      <Route path='/menu/drinks' exact element={show? (<Menu_Drink handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} />)} />
+      <Route path='/menu/condiments' exact element={show? (<Menu_Condiments handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} />)} />
       <Route path='/locations' exact element={<Locations />} />
 
 

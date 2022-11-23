@@ -3,6 +3,7 @@ const dbs = require('./dbManager.js');
 const { Pool } = require('pg');
 const dotenv = require('dotenv').config();
 var cors = require('cors');
+const axios = require('axios');
 
 
 // Create express app
@@ -57,10 +58,18 @@ app.get('/api/inventory', async (req,res) => {
     res.json(data);
 });
 
+app.post('/api/locations', async (req,res) => {
+    lat = req.body.lat;
+    lng = req.body.lng;
+    let url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+lat+'%2C'+lng+'&radius=300000&keyword=Chick-fil-A&key=AIzaSyA8oguzweCmBK3KUJTIckl3rdRO17iKQjg';
+    locations = await axios.get(url);
+    const data = {locations:locations.data.results};
+    res.send(data);
+});
+
 
 
 app.post('/api/submit_menuItem',async (req,res) =>{
-    console.log(req.body);
     item_ID = Math.floor(Math.random() * 800000000);
 
     let sql = "INSERT INTO menu_items VALUES('"+item_ID+"','"+req.body.item_name+"','"+req.body.quantity+"','"+req.body.price+"','"+req.body.food_type+"');";
@@ -229,6 +238,7 @@ app.post('/api/sales_report', async (req,res) => {
     const data = {sales_report:value};
     res.send(JSON.stringify(data));
 });
+
 
 
 
