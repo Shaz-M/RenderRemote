@@ -18,6 +18,9 @@ import Manager_Excess from './pages/Manager_Excess';
 import Manager_Restock from './pages/Manager_Restock';
 import Manager_SalesTog from './pages/Manager_SalesTog';
 import Locations from './pages/Locations';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 function App() {
   const [show, setShow] = useState(true);

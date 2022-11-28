@@ -100,12 +100,41 @@ app.post('/api/submit_order', async (req,res) =>{
     order_UID = Math.floor(Math.random() * 800000000);
     date = new Date().toISOString().slice(0, 10);
     order_items = req.body.order_items;
-    sales_UID = 0;
+    let sales_UID = 0;
     
-    // TODO: implement sales connection
+    // if date not in sales then create table member
+    // else use existing
+    let curr_count = 0;
+    let total_rev  = 0.0;
+
+    let sql = "SELECT * FROM sales WHERE sales_date='"+date+"';";
+
+    let valid = await dbs.queryDatabase(sql);
+
+    if(valid.length===0){
+        //create new entry
+        sales_UID = Math.floor(Math.random() * 800000000);
+        sql = "INSERT INTO sales VALUES('"+sales_UID+"','"+0.0+"','"+date+"','0','1');";
+        await dbs.queryDatabase(sql);
+
+    }
+    else{
+        sales_UID = valid[0].sales_id;
+        curr_count = valid[0].sales_count;
+        total_rev = valid[0].sales_total_revenue;
+    }
+
+    curr_count += order_items.length;
+    total_rev = parseFloat(total_rev)+parseFloat(total);
+    total_rev = total_rev.toFixed(2);
+
+    //add sales to sales table
+    sql = "UPDATE sales SET sales_total_revenue='"+total_rev+"',sales_count='"+curr_count+"' WHERE sales_date='"+date+"';";
+    await dbs.queryDatabase(sql);
+
 
     // add customer info into customers table
-    let sql = "INSERT INTO customer VALUES('"+customer_UID+"','"+fname+"','"+lname+"','"+payment_type+"');";
+    sql = "INSERT INTO customer VALUES('"+customer_UID+"','"+fname+"','"+lname+"','"+payment_type+"');";
 
     await dbs.queryDatabase(sql);
 

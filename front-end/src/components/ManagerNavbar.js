@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Logo from '../assests/Chick-fil-A-Logo.png'
 import { Link } from "react-router-dom";
 import ReorderIcon from "@material-ui/icons/Reorder";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import "../styles/Navbar.css";
 
 function ManagerNavbar({ setManagerNav }) {
@@ -28,8 +30,10 @@ function ManagerNavbar({ setManagerNav }) {
         <Link to="/manager/menu_items"> Menu Items </Link>
         <Link to="/manager/inventory"> Inventory </Link>
         <Link to="/manager/excess"> Excess </Link>
-        <Link to="/manager/sales_together"> Sales Together </Link>
-        <Link to="/manager/restock"> Restock </Link>
+        {
+          // <Link to="/manager/sales_together"> Sales Together </Link>
+          // <Link to="/manager/restock"> Restock </Link> 
+        }
         <button onClick={toggleNavbar}>
           <ReorderIcon />
         </button>

@@ -1,0 +1,12 @@
+.tableTitle{
+    font-style: italic;
+    width: 100%;
+    text-align:center;
+    text-decoration: underline;
+}
+
+.box{
+    border: 2px solid black;
+    border-radius: 10px;
+
+}
