@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect,useState } from "react";
 import { getSalesReport } from '../services/menuService';
 import ReportQueryForm from '../components/ReportQueryForm';
+import '../styles/Manager.css';
 
 function Manager_Sales({setManagerNav}) {
     const [sales, setSales] = useState([]);
@@ -21,13 +22,38 @@ function Manager_Sales({setManagerNav}) {
   if(sales.length!==0){
 
     return (
+      // <div className='menu'>
+      //       <center> 
+      //           <h1 className='Title'> Sales Report </h1> 
+      //           <p>Given a timeframe, check the quanity sold for all products sold to customers. Input a start and end date (mm/dd/yyyy).</p>
+      //       </center>
+      // </div>
         <div>
+          <div className='menu'>
+          <center> 
+              <h1 className='Title'> Sales Report </h1> 
+              <p>Given a timeframe, check the quanity sold for all products sold to customers. Input a start and end date (mm/dd/yyyy).</p>
+         </center>
+          </div>
+          <div className='sales_report_name_count'>
+          <table>
+                <tr>
+                  <th>Name</th>
+                  <th>Left</th>
+                </tr>
+              </table> 
+              </div>
 
             {sales.sales_report.map((item,index) => {
                 
                     return (
-                        <div key={index}>                    
-                            <div>{item.item_name} | {item.count} </div>
+                        <div className='manger_sales_table' key={index}>  
+                          <table>
+                          <tr>
+                            <td className='id'>{item.item_name}</td>
+                            <td className='name'>{item.count}</td>
+                          </tr>
+                          </table>                
                         </div>
                             )
                         
@@ -44,8 +70,8 @@ function Manager_Sales({setManagerNav}) {
     <div>
       <div className='menu'>
             <center> 
-                <h1 className='menuTitle'> Sales </h1> 
-                List of Items and Amount Sold
+                <h1 className='Title'> Sales Report </h1> 
+                <p>Given a timeframe, check the quanity sold for all products sold to customers. Input a start and end date (mm/dd/yyyy).</p>
             </center>
       </div>
       <ReportQueryForm handleSubmit={handleSubmit} />

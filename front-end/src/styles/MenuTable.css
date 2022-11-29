@@ -1,4 +1,20 @@
+@font-face {
+    font-family: "Chicken";
+    src: url(../fonts/Chicken-Hut.ttf);
+}
+@font-face {
+    font-family: "fila";
+    src: url(../fonts/font-fil-a.ttf);
+}
+
+.menu .menuTitle{
+    font-family: "Chicken";
+    font-size: 80px;
+    color: red;
+
+}
 .tableTitle{
+    font-family: "fila";
     font-style: italic;
     width: 100%;
     text-align:center;
@@ -9,4 +25,9 @@
     border: 2px solid black;
     border-radius: 10px;
 
+}
+
+.box .tableTitle{
+    font-size: 25px;
+    color: red;
 }

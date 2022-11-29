@@ -12,7 +12,9 @@ import lemonade from '../assests/lemonade.png'
 import fries from '../assests/fries.png'
 import chicken_noodle_soup from '../assests/chicken_noodle.png'
 import mac_cheese from '../assests/mac_cheese.png'
-import apple_pie from '../assests/apple_pie.png'
+import chick_sauce from '../assests/chick-fil-a_sauce.png'
+import poly_sauce from '../assests/polynesian.png'
+
 
 export const MenuList = [
     {
@@ -102,12 +104,6 @@ export const MenuList = [
         type: "Drink"
     },
     {
-        name:"Apple Pie",
-        image: apple_pie,
-        id: "10221",
-        type: "Side"
-    },
-    {
         name:"Chicken Noodle Soup",
         image: chicken_noodle_soup,
         id: "10215",
@@ -143,6 +139,18 @@ export const MenuList = [
         image: fries,
         id: "10212",
         type: "Side"
+    },
+    {
+        name:"Chick-fil-a Sauce",
+        image: chick_sauce,
+        id: "10227",
+        type: "Condiments"
+    },
+    {
+        name:"Polynesian Sauce",
+        image: poly_sauce,
+        id: "10228",
+        type: "Condiments"
     },
 
 ]

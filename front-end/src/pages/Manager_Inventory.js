@@ -4,6 +4,8 @@ import { getInventoryItems } from '../services/menuService';
 import AddMenuItemForm from '../components/AddMenuItemForm';
 import { updateInventory } from '../services/menuService';
 import UpdateInvForm from '../components/UpdateInvForm';
+import '../styles/Manager.css';
+
 
 function Manager_Inventory({setManagerNav}) {
     const [inventory, setInventory] = useState([]);
@@ -27,20 +29,35 @@ function Manager_Inventory({setManagerNav}) {
   if(inventory.length!==0){
 
     return (
-        <div>
-          <div className='menu'>
+        <div className='inventory_div'>
+          <div className='inventory_menu'>
               <center> 
-                  <h1 className='menuTitle'> Inventory Items </h1> 
+                  <h1 className='Title'> Inventory Items </h1> 
               </center>
+              <table align='center'>
+                <tr>
+                  <th>ID </th>
+                  <th>Name        </th>
+                  <th>Left</th>
+                </tr>
+              </table>  
           </div>
 
             {inventory.inventory.map(item => {
                 
                     return (
-                        <div>                    
-                            <div>ID:{item.inventory_id} | {item.inventory_name} - Quantity Left:{item.inventory_quantity}</div>
-                        </div>
-                            )
+                      <div className='map_inventory'>
+                      <table>
+                      <tr>
+                        <td className='id'>{item.inventory_id}</td>
+                        <td className='name'>{item.inventory_name}</td>
+                        <td className='quantity'>{item.inventory_quantity}</td>
+                      </tr>
+                      </table>
+                      </div>
+                                          
+                  
+                    )
                         
                 })}
 

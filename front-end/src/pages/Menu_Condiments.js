@@ -16,6 +16,17 @@ function Menu_Condiments({handleClick, remove, countItem}) {
 
   },[])
 
+  function images_condiments(item_id){
+    //console.log("yes");
+    for(let obj in MenuList){
+      //console.log(typeof MenuList[obj].id + " "  + typeof item_id.toString());
+      if(MenuList[obj].id == item_id.toString()){
+        //console.log("goes inside");
+        return MenuList[obj].image;
+      }
+    }
+  }
+
 
   if(menuItems.length!==0){
 
@@ -28,7 +39,7 @@ function Menu_Condiments({handleClick, remove, countItem}) {
                 {menuItems.condiments.map(menuItem => {
                   return <MenuItem 
                   key={menuItem.item_id}
-                  image={null}
+                  image={images_condiments(menuItem.item_id)}
                   item={menuItem}
                   handleClick={handleClick}
                   remove={remove}
