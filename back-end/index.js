@@ -51,6 +51,13 @@ app.get('/api/menu_items', async (req,res) => {
     res.json(data);
 });
 
+app.get('/api/sales', async (req,res) => {
+    sales = await dbs.queryDatabase("SELECT * FROM sales ORDER BY sales_date;");
+
+    const data = {sales:sales};
+    res.json(data);
+});
+
 app.get('/api/inventory', async (req,res) => {
     inventory = await dbs.queryDatabase("SELECT * FROM inventories;");
 

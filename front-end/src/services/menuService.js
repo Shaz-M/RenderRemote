@@ -9,6 +9,17 @@ export async function getMenuItems(){
     }
 }
 
+export async function getSales(){
+
+    try{
+        const response = await fetch('http://localhost:5000/api/sales');
+        return await response.json();
+    }
+    catch(error){
+        return [];
+    }
+}
+
 export async function getInventoryItems(){
 
     try{
