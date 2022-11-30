@@ -31,3 +31,14 @@
     font-size: 25px;
     color: red;
 }
+
+.lineChart{
+    background-color: rgba(226, 199, 199, 0.808);
+    width: 100%;
+    height: 550px;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+
+}
