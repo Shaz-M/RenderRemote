@@ -5,7 +5,13 @@ import { Line } from "react-chartjs-2";
 import Container from "react-bootstrap/Container"
 import "../styles/MenuTable.css"
 import { getSales } from "../services/menuService";
+import { getBarSales } from "../services/menuService";
+import { getPieSales } from "../services/menuService";
 import { dasherize } from "prelude-ls";
+import { Bar } from "react-chartjs-2";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { Pie } from "react-chartjs-2";
 
 
 
@@ -34,6 +40,12 @@ const options =  {
 
 }
 
+
+const barOptions = {
+    maintainAspectRatio: false,
+    indexAxis: 'y',
+}
+
   
 
 
@@ -42,6 +54,13 @@ function Manager({setManagerNav}) {
 
   const [dates, setDates] = useState([]);
   const [data, setData] = useState([]);
+
+  const [barLabels, setBarLabels] = useState([]);
+  const [barDataNum, setBarDataNum] = useState([]);
+
+  const [pieLabels, setPieLabels] = useState([]);
+  const [pieDataNum, setPieDataNum] = useState([]);
+
 
   useEffect(() => {
     let temp_date = [];
@@ -54,8 +73,39 @@ function Manager({setManagerNav}) {
 
       setDates(temp_date);
       setData(temp_data);
-  })
-});
+    })
+
+    let _barLabels = [];
+    let _barData = [];
+
+    getBarSales().then(response =>{
+      for(let item in response.sales){
+        if (typeof response.sales[item].count !== 'undefined'){
+          _barLabels.push(response.sales[item].item_name);
+          _barData.push(response.sales[item].count);
+        }
+      }
+
+      setBarLabels(_barLabels);
+      setBarDataNum(_barData);
+    })
+
+    let _pieLabels = [];
+    let _pieData = [];
+
+    getPieSales().then(response =>{
+      for(let item in response.sales){
+        if (typeof response.sales[item].food_type !== 'undefined'){
+          _pieLabels.push(response.sales[item].food_type);
+          _pieData.push(response.sales[item].count);
+        }
+        
+      }
+
+      setPieLabels(_pieLabels);
+      setPieDataNum(_pieData);
+    })
+},[]);
 
 const lineData = {
   labels: dates,
@@ -73,13 +123,40 @@ const lineData = {
 
 
 
+const barData = {
+  labels: barLabels,
+  datasets: [{
+      barPercentage: 0.5,
+      barThickness: 6,
+      maxBarThickness: 8,
+      minBarLength: 2,
+      data: barDataNum
+  }]
+};
 
-  if(dates.length === 0 || data.length === 0){
+
+const pieData = {
+  datasets: [{
+      data: pieDataNum
+  }],
+
+  // These labels appear in the legend and in the tooltips when hovering different arcs
+  labels: pieLabels
+}
+
+
+
+
+  if(dates.length === 0 || data.length === 0 || barDataNum.length == 0 || barLabels.length == 0){
     return(<div></div>)
   }
   else{
     lineData.labels = dates;
     lineData.datasets[0].data = data;
+    barData.labels = barLabels;
+    barData.datasets[0].data = barDataNum;
+    pieData.labels = pieLabels;
+    pieData.datasets[0].data = pieDataNum;
   }
 
   return (
@@ -91,6 +168,21 @@ const lineData = {
         <div className="lineChart">
           <Line data={lineData} options={options}/>
         </div>
+
+        <Row>
+          <Col>
+            <div className="smallerCharts">
+              <Bar data={barData} options={barOptions} />
+            </div>
+          </Col>
+          <Col>
+          <div className="smallerCharts">
+          <Pie data={pieData}/>
+          </div>
+            
+          </Col>
+
+        </Row>
       </Container>
     </div>
   );

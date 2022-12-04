@@ -20,6 +20,28 @@ export async function getSales(){
     }
 }
 
+export async function getBarSales(){
+
+    try{
+        const response = await fetch('http://localhost:5000/api/barChartSales');
+        return await response.json();
+    }
+    catch(error){
+        return [];
+    }
+}
+
+export async function getPieSales(){
+
+    try{
+        const response = await fetch('http://localhost:5000/api/pieChartSales');
+        return await response.json();
+    }
+    catch(error){
+        return [];
+    }
+}
+
 export async function getInventoryItems(){
 
     try{

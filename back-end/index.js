@@ -58,6 +58,20 @@ app.get('/api/sales', async (req,res) => {
     res.json(data);
 });
 
+app.get('/api/barChartSales', async (req,res) => {
+    sales = await dbs.queryDatabase("SELECT m.item_name,count(m.item_name) FROM order_menu o JOIN menu_items m ON o.item_id = m.item_id JOIN orders_cfa p ON o.order_id = p.order_id GROUP BY m.item_name ORDER BY count DESC;");
+
+    const data = {sales:sales};
+    res.json(data);
+});
+
+app.get('/api/pieChartSales', async (req,res) => {
+    sales = await dbs.queryDatabase("SELECT m.food_type,count(m.item_name) FROM order_menu o JOIN menu_items m ON o.item_id = m.item_id JOIN orders_cfa p ON o.order_id = p.order_id GROUP BY m.food_type ORDER BY count;");
+
+    const data = {sales:sales};
+    res.json(data);
+});
+
 app.get('/api/inventory', async (req,res) => {
     inventory = await dbs.queryDatabase("SELECT * FROM inventories;");
 
@@ -274,6 +288,8 @@ app.post('/api/sales_report', async (req,res) => {
     const data = {sales_report:value};
     res.send(JSON.stringify(data));
 });
+
+
 
 
 
