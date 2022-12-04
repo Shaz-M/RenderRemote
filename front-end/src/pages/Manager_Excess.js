@@ -21,6 +21,12 @@ function Manager_Excess({setManagerNav}) {
 
     return (
         <div>
+            <div className='menu'>
+                <center> 
+                    <h1 className='menuTitle'> Excess Report </h1> 
+                    Items in Excess
+                </center>
+            </div>
 
             {excess.excess_report.map((item,index) => {
                 

@@ -7,6 +7,7 @@ function MenuTable({items}) {
     <Table>
         <Thead>
         <Tr>
+            <Th>ID</Th>
             <Th>Item Name</Th>
             <Th>Price</Th>
         </Tr>
@@ -14,7 +15,7 @@ function MenuTable({items}) {
         <Tbody>
         {items.map(menuItem => {
                 
-                return (<Tr><Td>{menuItem.item_name}</Td>
+                return (<Tr><Td>{menuItem.item_id}</Td><Td>{menuItem.item_name}</Td>
                     <Td>{menuItem.price}</Td></Tr>)
 
             })}

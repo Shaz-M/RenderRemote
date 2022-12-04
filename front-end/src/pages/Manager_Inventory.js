@@ -1,29 +1,45 @@
 import React from 'react'
 import { useEffect,useState } from "react";
-import { getInventoryItems } from '../services/menuService';
+import { addInventory, getInventoryItems } from '../services/menuService';
 import AddMenuItemForm from '../components/AddMenuItemForm';
 import { updateInventory } from '../services/menuService';
 import UpdateInvForm from '../components/UpdateInvForm';
 import '../styles/Manager.css';
+import AddInventoryForm from '../components/AddInventoryForm';
 
 
 function Manager_Inventory({setManagerNav}) {
     const [inventory, setInventory] = useState([]);
+    const [updated,setUpdated] = useState(false);
     setManagerNav(true);
 
     useEffect(() => {
       getInventoryItems().then(response => {
         setInventory(response);
     })
+      setUpdated(false);
+
   
-    },[])
+    },[updated])
 
     const handleSubmit = async (event) =>{
         event.preventDefault();
         let id = event.target.id.value;
         let quantity = event.target.quantity.value;
         let response = await updateInventory(id,quantity);
+        event.target.reset();
+        setUpdated(true);
+
     }
+
+    const handleSubmitAdd = async (event) =>{
+      event.preventDefault();
+      let name = event.target.name.value;
+      let quantity = event.target.quantity.value;
+      let response = await addInventory(name,quantity);
+      event.target.reset();
+      setUpdated(true);
+  }
 
 
   if(inventory.length!==0){
@@ -62,6 +78,7 @@ function Manager_Inventory({setManagerNav}) {
                 })}
 
             <UpdateInvForm handleSubmit={handleSubmit} />
+            <AddInventoryForm handleSubmit={handleSubmitAdd}/>
 
         </div>
     )

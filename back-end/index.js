@@ -98,12 +98,31 @@ app.post('/api/submit_menuItem',async (req,res) =>{
     res.end();
 });
 
+app.post('/api/add_inventory',async (req,res) =>{
+    inventory_ID = Math.floor(Math.random() * 800000000);
+
+    let sql = "INSERT INTO inventories VALUES('"+inventory_ID+"','"+req.body.name+"','"+req.body.quantity+"');";
+    await dbs.queryDatabase(sql);
+    res.end();
+});
+
 app.post('/api/update_inventory',async (req,res) =>{
     console.log(req.body);
     id = req.body.id;
     quantity = req.body.quantity;
 
     let sql = "UPDATE inventories SET inventory_quantity='"+quantity+"'WHERE inventory_id='"+id+"';"
+    await dbs.queryDatabase(sql);
+    res.end();
+
+});
+
+app.post('/api/update_menu_price',async (req,res) =>{
+    console.log(req.body);
+    id = req.body.id;
+    price = req.body.price;
+
+    let sql = "UPDATE menu_items SET price='"+price+"'WHERE item_id='"+id+"';"
     await dbs.queryDatabase(sql);
     res.end();
 
