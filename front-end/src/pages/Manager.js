@@ -12,6 +12,10 @@ import { Bar } from "react-chartjs-2";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Pie } from "react-chartjs-2";
+import { withTheme } from "@material-ui/core";
+
+
+
 
 
 
@@ -35,6 +39,10 @@ const options =  {
     plugins: {
       legend: {
           display: false,
+      },
+      title:{
+        display:true,
+        text:'Revenue Over Time'
       }
   }
 
@@ -44,13 +52,31 @@ const options =  {
 const barOptions = {
     maintainAspectRatio: false,
     indexAxis: 'y',
+    plugins: {
+      legend: {
+          display: false,
+      },
+      title:{
+        display:true,
+        text:'Sales of Specific Menu Items'
+      }
+  }
+}
+
+const pieOptions = {
+  plugins: {
+
+    title:{
+      display:true,
+      text:'Sales Based on Category'
+    }
+}
 }
 
   
 
 
-function Manager({setManagerNav}) {
-  setManagerNav(true);
+function Manager({setManagerNav,managerAuth,setManagerAuth}) {
 
   const [dates, setDates] = useState([]);
   const [data, setData] = useState([]);
@@ -60,6 +86,40 @@ function Manager({setManagerNav}) {
 
   const [pieLabels, setPieLabels] = useState([]);
   const [pieDataNum, setPieDataNum] = useState([]);
+
+  function handleCallbackResponse(response){
+    setManagerAuth(true);
+    console.log("User Authenicated");
+    //document.getElementById("signInDiv").hidden = true;
+    //console.log("Encoded JWT ID token: ",response.credential);
+    const boxes = document.querySelectorAll('.S9gUrf-YoZ4jf');
+      console.log(boxes);
+    boxes.forEach(box => {
+      box.remove();
+    });
+  }
+
+  useEffect(() => {
+    setManagerNav(true);
+
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:"282294513169-1ftcl7oqtbdb40cbk5a7sug7uua1jdn9.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      { theme: "outline", size: "large"}
+    );
+
+  },[managerAuth])
+
+  function signOut(){
+    setManagerAuth(false);
+    console.log("User signed out");
+  }
+
 
 
   useEffect(() => {
@@ -80,7 +140,7 @@ function Manager({setManagerNav}) {
 
     getBarSales().then(response =>{
       for(let item in response.sales){
-        if (typeof response.sales[item].count !== 'undefined'){
+        if (typeof response.sales[item].item_name !== 'undefined'){
           _barLabels.push(response.sales[item].item_name);
           _barData.push(response.sales[item].count);
         }
@@ -137,14 +197,17 @@ const barData = {
 
 const pieData = {
   datasets: [{
-      data: pieDataNum
+      data: pieDataNum,
+      backgroundColor: ['#003f5c','#444e86','#955196','#dd5182','#ff6e54','#ffa600']
   }],
 
   // These labels appear in the legend and in the tooltips when hovering different arcs
   labels: pieLabels
 }
 
-
+if(managerAuth === false){
+  return (<div id="signInDiv"></div>)
+}
 
 
   if(dates.length === 0 || data.length === 0 || barDataNum.length == 0 || barLabels.length == 0){
@@ -159,8 +222,10 @@ const pieData = {
     pieData.datasets[0].data = pieDataNum;
   }
 
+  console.log(managerAuth);
   return (
     <div>
+      <button type="button" onClick={signOut}>Sign Out</button>
       <Container>
           <center class="menu"> 
                 <h1 className='menuTitle'> Manager Dashboard </h1> 
@@ -177,13 +242,15 @@ const pieData = {
           </Col>
           <Col>
           <div className="smallerCharts">
-          <Pie data={pieData}/>
+          <Pie data={pieData} options={pieOptions}/>
           </div>
             
           </Col>
 
         </Row>
+
       </Container>
+  
     </div>
   );
 }
