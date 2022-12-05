@@ -7,14 +7,14 @@ import grilled_chicken_club_sandwich from '../assests/grilled_chicken_club_sandw
 import nuggets from '../assests/nuggets.png'
 import thirty_nuggets from '../assests/nuggets.png'
 import grilled_spicy_deluxe from '../assests/grilled_spicy_deluxe.png'
-import soft_drinks from '../assests/soft_drinks.png'
-import lemonade from '../assests/lemonade.png'
+import soft_drinks from '../assests/soft_drink.png'
+import lemonade2 from '../assests/lemonade3.png'
 import fries from '../assests/fries.png'
 import chicken_noodle_soup from '../assests/chicken_noodle.png'
 import mac_cheese from '../assests/mac_cheese.png'
 import chick_sauce from '../assests/chick-fil-a_sauce.png'
 import poly_sauce from '../assests/polynesian.png'
-
+import choco from '../assests/choco.png'
 
 export const MenuList = [
     {
@@ -86,20 +86,39 @@ export const MenuList = [
         type: "Drink"
     },
     {
+        name:"Med Soft Drink",
+        image: soft_drinks,
+        id: "10217",
+        type: "Drink"
+    },
+    {
+        name:"Large Soft Drink",
+        image: soft_drinks,
+        id: "10218",
+        type: "Drink"
+    },
+    {
+        name:"Chocolate Milk",
+        image: choco,
+        id:"10223",
+        type:"Drink"
+
+    },
+    {
         name:"small Lemonade",
-        image: lemonade,
+        image: lemonade2,
         id: "10219",
         type: "Drink"
     },
     {
         name:"Medium Lemonade",
-        image: lemonade,
+        image: lemonade2,
         id: "10220",
         type: "Drink"
     },
     {
         name:"Large Lemonade",
-        image: lemonade,
+        image: lemonade2,
         id: "10221",
         type: "Drink"
     },
