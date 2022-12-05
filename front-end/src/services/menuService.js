@@ -77,6 +77,18 @@ export async function addMenuItemQuery(item_name,quantity,price,food_type){
 
 }
 
+export async function addInventory(name,quantity){
+    const response = await fetch('http://localhost:5000/api/add_inventory',{
+        method:'POST',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name:name,quantity:quantity})
+    });
+
+    return await response;
+
+}
+
 
 export async function updateInventory(id,quantity){
     const response = await fetch('http://localhost:5000/api/update_inventory',{
@@ -84,6 +96,18 @@ export async function updateInventory(id,quantity){
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({id:id,quantity:quantity})
+    });
+
+    return await response;
+
+}
+
+export async function updateMenuPrice(id,price){
+    const response = await fetch('http://localhost:5000/api/update_menu_price',{
+        method:'POST',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({id:id,price:price})
     });
 
     return await response;

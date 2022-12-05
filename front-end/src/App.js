@@ -19,6 +19,9 @@ import Manager_Restock from './pages/Manager_Restock';
 import Manager_SalesTog from './pages/Manager_SalesTog';
 import Locations from './pages/Locations';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import jwt_decode from "jwt-decode"
+import { Navigate } from "react-router-dom";
+
 
 
 
@@ -26,6 +29,8 @@ function App() {
   const [show, setShow] = useState(true);
   const [cart, setCart] = useState([]);
   const [managerNav, setManagerNav] = useState(false);
+  const [managerAuth, setManagerAuth] = useState(false);
+
   
 
   const countItem = (item2) => {
@@ -58,13 +63,13 @@ function App() {
       {managerNav?(<ManagerNavbar setManagerNav={setManagerNav}/>) :(<Navbar setShow={setShow} size={cart.length}/>)}
     <Routes>
       <Route path='/' exact element={<Home />} />
-      <Route path='/manager' exact element={<Manager setManagerNav={setManagerNav} />} />
-      <Route path='/manager/menu_items' exact element={<Manager_Menu setManagerNav={setManagerNav} />} />
-      <Route path='/manager/inventory' exact element={<Manager_Inventory setManagerNav={setManagerNav} />} />
-      <Route path='/manager/sales' exact element={<Manager_Sales setManagerNav={setManagerNav} />} />
-      <Route path='/manager/excess' exact element={<Manager_Excess setManagerNav={setManagerNav} />} />
-      <Route path='/manager/restock' exact element={<Manager_Restock setManagerNav={setManagerNav} />} />
-      <Route path='/manager/sales_together' exact element={<Manager_SalesTog setManagerNav={setManagerNav} />} />
+      <Route path='/manager' exact element={<Manager managerAuth={managerAuth} setManagerAuth={setManagerAuth} setManagerNav={setManagerNav} />} />
+      <Route path='/manager/menu_items' exact element={managerAuth? (<Manager_Menu setManagerNav={setManagerNav}/>):(<Navigate to="/Manager"/>)} />
+      <Route path='/manager/inventory' exact element={managerAuth? (<Manager_Inventory setManagerNav={setManagerNav} />):(<Navigate to="/Manager"/>)} />
+      <Route path='/manager/sales' exact element={managerAuth? (<Manager_Sales setManagerNav={setManagerNav} />):(<Navigate to="/Manager"/>)} />
+      <Route path='/manager/excess' exact element={managerAuth? (<Manager_Excess setManagerNav={setManagerNav} />) :(<Navigate to="/Manager"/>)}/>
+      <Route path='/manager/restock' exact element={managerAuth? (<Manager_Restock setManagerNav={setManagerNav} />):(<Navigate to="/Manager"/>)} />
+      <Route path='/manager/sales_together' exact element={managerAuth? (<Manager_SalesTog setManagerNav={setManagerNav} />):(<Navigate to="/Manager"/>)} />
       <Route path='/menu' exact element={show? (<Menu handleClick={handleClick}/>):(<Cart cart={cart} />)} />
       <Route path='/menu/entrees' exact element={show? (<Menu_Entrees handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} />)} />
       <Route path='/menu/side' exact element={show? (<Menu_Side handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} />)} />

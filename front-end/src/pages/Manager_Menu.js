@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect,useState } from "react";
-import { getMenuItems } from '../services/menuService';
+import { getMenuItems, updateMenuPrice } from '../services/menuService';
 import AddMenuItemForm from '../components/AddMenuItemForm';
 import { addMenuItemQuery } from '../services/menuService';
 import Container from 'react-bootstrap/Container'
@@ -8,17 +8,19 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MenuTable from '../components/MenuTable';
 import "../styles/MenuTable.css"
+import UpdateMenuPriceForm from '../components/UpdateMenuPriceForm';
 
 function Manager_Menu({setManagerNav}) {
     const [menuItems, setMenuItems] = useState([]);
+    const [updated,setUpdated] = useState(false);
     setManagerNav(true);
 
     useEffect(() => {
       getMenuItems().then(response => {
         setMenuItems(response);
     })
-  
-    },[])
+      setUpdated(false);
+    },[updated])
 
     const handleSubmit = async (event) =>{
         event.preventDefault();
@@ -28,7 +30,19 @@ function Manager_Menu({setManagerNav}) {
         let price = event.target.price.value;
         let food_type = event.target.food_type.value;
         let response = await addMenuItemQuery(item_name,quantity,price,food_type);
+        event.target.reset();
+        setUpdated(true);
     }
+
+    const handleSubmitUpdate = async (event) =>{
+      event.preventDefault();
+      let id = event.target.id.value;
+      let price = event.target.price.value;
+      let response = await updateMenuPrice(id,price);
+      event.target.reset();
+      setUpdated(true);
+
+  }
 
 
   if(menuItems.length!==0){
@@ -65,43 +79,12 @@ function Manager_Menu({setManagerNav}) {
               <MenuTable items={menuItems.condiments}/>
             </Col>
           </Row>
-      
+
+          <AddMenuItemForm handleSubmit={handleSubmit}/>
+          <UpdateMenuPriceForm handleSubmit={handleSubmitUpdate}/>
       </Container>
       </div>
     );
-
-    return (
-        <div>
-          <div className='menu'>
-              <center> 
-                  <h1 className='menuTitle'> Menu Items </h1> 
-              </center>
-          </div>
-            {menuItems.condiments.map(menuItem => {
-                
-                    return <div>{menuItem.item_name} - {menuItem.quantity_left}</div>
-                        
-                })}
-
-        {menuItems.drinks.map(menuItem => {
-                    return <div>{menuItem.item_name} - {menuItem.quantity_left}</div>
-
-                })}
-
-{menuItems.sides.map(menuItem => {
-                        return <div>{menuItem.item_name} - {menuItem.quantity_left}</div>
-
-                })}
-         {menuItems.entrees.map(menuItem => {
-                        return <div>{menuItem.item_name} - {menuItem.quantity_left}</div>
-
-                })}
-
-        <AddMenuItemForm handleSubmit={handleSubmit} />
-
-
-        </div>
-    )
 
   }
 
