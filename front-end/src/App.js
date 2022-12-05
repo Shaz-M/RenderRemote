@@ -71,10 +71,10 @@ function App() {
       <Route path='/manager/restock' exact element={managerAuth? (<Manager_Restock setManagerNav={setManagerNav} />):(<Navigate to="/Manager"/>)} />
       <Route path='/manager/sales_together' exact element={managerAuth? (<Manager_SalesTog setManagerNav={setManagerNav} />):(<Navigate to="/Manager"/>)} />
       <Route path='/menu' exact element={show? (<Menu handleClick={handleClick}/>):(<Cart cart={cart} />)} />
-      <Route path='/menu/entrees' exact element={show? (<Menu_Entrees handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} />)} />
-      <Route path='/menu/side' exact element={show? (<Menu_Side handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} />)} />
-      <Route path='/menu/drinks' exact element={show? (<Menu_Drink handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} />)} />
-      <Route path='/menu/condiments' exact element={show? (<Menu_Condiments handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} />)} />
+      <Route path='/menu/entrees' exact element={show? (<Menu_Entrees handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} setCart={setCart}/>)} />
+      <Route path='/menu/side' exact element={show? (<Menu_Side handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} setCart={setCart}/>)} />
+      <Route path='/menu/drinks' exact element={show? (<Menu_Drink handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} setCart={setCart}/>)} />
+      <Route path='/menu/condiments' exact element={show? (<Menu_Condiments handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} setCart={setCart} />)} />
       <Route path='/locations' exact element={<Locations />} />
 
 

@@ -5,6 +5,7 @@ import "../styles/Home.css";
 import GoogleTranslate from "../components/GoogleTranslate";
 
 function Home() {
+  
   return (
     <div className="home" style={{ backgroundImage: `url(${BannerImage})` }}>
       <div className="headerContainer">
