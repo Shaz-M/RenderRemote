@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import MenuTable from '../components/MenuTable';
 import "../styles/MenuTable.css"
 import UpdateMenuPriceForm from '../components/UpdateMenuPriceForm';
+import dropdown from './Dropdown';
 
 function Manager_Menu({setManagerNav}) {
     const [menuItems, setMenuItems] = useState([]);

@@ -4,8 +4,10 @@ import Cart from '../assests/cart.png'
 import { Link } from "react-router-dom";
 import ReorderIcon from "@material-ui/icons/Reorder";
 import "../styles/Navbar.css";
+// import Dropdown from './Dropdown'
 
 function Navbar({ setShow, size }) {
+  const [click, setClick]  = useState(false);
   const [openLinks, setOpenLinks] = useState(false);
 
   const toggleNavbar = () => {
@@ -29,7 +31,9 @@ function Navbar({ setShow, size }) {
         <Link to="/contact"> Contact </Link>
         <Link to="/locations"> Locations </Link>
         <div className="cart" onClick={() => setShow(false)}><img src={Cart} /> Cart - {size}</div>
+        <ReorderIcon color= 'white'><Link> Section </Link></ReorderIcon>
         <button onClick={toggleNavbar}>
+        
           <ReorderIcon />
         </button>
       </div>
