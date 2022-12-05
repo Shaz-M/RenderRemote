@@ -1,0 +1,135 @@
+@font-face {
+    font-family: "Chicken";
+    src: url(../fonts/Chicken-Hut.ttf);
+}
+@font-face {
+    font-family: "fila";
+    src: url(../fonts/font-fil-a.ttf);
+}
+
+/* .orderform{
+    display: flex;
+    font-size: 30px;
+    padding-left: 38%;
+    border:2px solid green;
+    
+}
+.Cart{
+    display: flex;
+}
+
+.col{
+    display: flex;
+    padding-left: 0%;
+    padding-right: 10%;
+}
+
+.Order_cart{
+    font-size: 30px;
+    padding-left: 5%;
+    flex: 1;
+    border:2px solid yellow;
+
+}
+
+.Order_cart:first-child{
+    margin-left: 20px;
+    margin-right: 20px;
+} */
+
+.menuTitle_cart{
+    font-size: 100px;
+    font-family: "Chicken";
+    color: red;
+}
+.Cart{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    padding-top: 5%;
+}
+
+.Order_cart:first-child{
+    margin-left: 200px;
+    /* margin-right: 20px; */
+    font-size: 30px;
+    border: 10px dotted red;
+    align-items: center;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.orderform{
+    /* margin-left: 20px; */
+    margin-right: 200px;
+    font-size: 30px;
+    border: 10px dotted red;
+    align-items: center;
+    text-align: center;
+    padding-top: 20px;
+    
+}
+
+.submit_bttn{
+    font-size: 80px;
+}
+
+/* <!-- HTML !-->
+<button class="button-45" role="button">Button 45</button> */
+
+/* CSS */
+.submit_bttn {
+  align-items: center;
+  background-color: #e25e5e;
+  /* background-position: 0 0; */
+  border: 1px solid #FEE0E0;
+  border-radius: 20px;
+  /* box-sizing: border-box; */
+  color: #ff2e2e;
+  /* cursor: pointer;
+  display: flex; */
+  width: auto;
+  height: auto;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 33.4929px;
+  padding: 2px 12px;
+  text-decoration: none;
+  text-shadow: none;
+  text-underline-offset: 1px;
+  transition: border .2s ease-in-out,box-shadow .2s ease-in-out;
+  
+}
+
+.Order_cart h1{
+    font-family: "fila";
+}
+
+
+
+.submit_bttn:hover {
+  background-color: #FFE3E3;
+  border-color: #FAA4A4;
+  color: black;
+  box-shadow: 0 5px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.fname{
+    border-radius: 10px;
+    border:0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.lname{
+    border-radius: 10px;
+    border:0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.item_price{
+    margin-left: 40px;
+    color: black;
+}
+
+
+

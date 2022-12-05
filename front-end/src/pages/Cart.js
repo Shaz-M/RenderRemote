@@ -3,6 +3,9 @@ import { submitOrder } from "../services/menuService";
 import OrderForm from "../components/OrderForm";
 import GoogleTranslate from "../components/GoogleTranslate"
 import { Alert } from '@mui/material'
+import '../styles/Cart.css';
+import { margin } from "@mui/system";
+
 
 const Cart = ({ cart,setCart }) => {
 
@@ -27,26 +30,32 @@ const Cart = ({ cart,setCart }) => {
 
 
     return(
-    <div>
+    <div className="Cart_full">
         {submitted &&
             <Alert varient='outlined' severity='success'>Order Submitted</Alert>
         }
         <div className='menu'>
             <center> 
-                <h1 className='menuTitle'> Your Cart </h1> 
+                <h1 className='menuTitle_cart'> Your Cart </h1> 
             </center>
         </div>
-
+    <div className="Cart">
+        <div className="Order_cart">
+        <h1>My Order</h1>
         {cart.map((item,index) => (
                 <div key={index}>
-                    {item.item_name} - {item.price}
+                    <span>{item.item_name} <a className="item_price"> {item.price} </a> </span>
                 </div>
         ))}
         <div>
             ---------------------------<br/>
-            Total Price: ${total}
+            Subtotal: ${total}
         </div>
-        <OrderForm handleSubmit={handleSubmit}/>
+        </div>
+        <div className="orderform">
+            <OrderForm handleSubmit={handleSubmit}/>
+        </div>
+    </div>
     </div>
     
     );
