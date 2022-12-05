@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Chicken";
+  src: url(../fonts/Chicken-Hut.ttf);
+}
+
 .menu {
   width: 100%;
   height: auto;
@@ -6,9 +11,10 @@
   align-items: center;
   flex-direction: column;
 }
-.menu .menuTitle {
-  font-family: cursive;
-  font-size: 60px;
+.menuTitle_1{
+  font-family: "Chicken";
+  font-size: 150px;
+  color: red;
 }
 button{
   display: inline-block;
@@ -18,8 +24,12 @@ button{
   width: 70vw;
   height: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   place-items: center;
+
+    /* display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px; */
 }
 
 .entree{
@@ -31,42 +41,78 @@ button{
 }
 
 .entree_button{
-  position: absolute; top: 250px; left: 250px;
+  position: absolute; top: 20%; left: 25%;
   font-size: large;
   background-image: url(../assests/Entrees.png);
-  background-size: cover;
-  width: 300px;
-  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 500px;
+  height: 300px;
+  border: none;
+  background-color: white;
+}
+
+.entree span{
+  position: absolute; top: 38%; left: 0%;
+  font-size: 30px;
+  align-items: center;
+  text-align: center;
+  padding-left: 30%;
+  color: black;
+}
+
+.side_button{
+  position: absolute; top: 20%; left: 55%;
+  font-size: large;
+  background-image: url(../assests/Sides\ \(1\).png);
+  background-size: contain;
+  width: 500px;
+  height: 300px;
   border: none;
 }
-.side_button{
-  position: absolute; top: 250px; left: 900px;
-  font-size: large;
-  background-image: url(../assests/sides.png);
-  background-size: cover;
-  width: 300px;
-  height: 200px;
-  border: none;
+
+.side span{
+  position: absolute; top: 38%; left: 62%;
+  font-size: 30px;
+  align-items: center;
+  text-align: center;
+  color: black;
 }
 .condiment_button{
-  position: absolute; top: 500px; left: 250px;
+  position: absolute; top: 50%; left: 25%;
   font-size: large;
   background-image: url(../assests/condiments.png);
   background-size: cover;
-  width: 300px;
-  height: 200px;
+  width: 500px;
+  height: 300px;
   border: none;
   
 }
+
+.condiments span{
+  position: absolute; top: 65%; left: 30%; 
+  font-size: 30px;
+  align-items: center;
+  text-align: center;
+  color: black;
+}
 .drink_button{
-  position: absolute; top: 500px; left: 900px;
+  position: absolute; top: 48%; left: 55%;
   font-size: large;
   background-image: url(../assests/drinks.png);
   background-size: cover;
-  width: 300px;
-  height: 200px;
+  width: 500px;
+  height: 300px;
   border: none;
 
+}
+
+.drink span{
+  position: absolute; top: 66%; left: 62%;
+  font-size: 30px;
+  align-items: center;
+  text-align: center;
+  color: black;
 }
 
 
