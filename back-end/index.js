@@ -58,6 +58,20 @@ app.get('/api/sales', async (req,res) => {
     res.json(data);
 });
 
+app.get('/api/barChartSales', async (req,res) => {
+    sales = await dbs.queryDatabase("SELECT m.item_name,count(m.item_name) FROM order_menu o JOIN menu_items m ON o.item_id = m.item_id JOIN orders_cfa p ON o.order_id = p.order_id GROUP BY m.item_name ORDER BY count DESC;");
+
+    const data = {sales:sales};
+    res.json(data);
+});
+
+app.get('/api/pieChartSales', async (req,res) => {
+    sales = await dbs.queryDatabase("SELECT m.food_type,count(m.item_name) FROM order_menu o JOIN menu_items m ON o.item_id = m.item_id JOIN orders_cfa p ON o.order_id = p.order_id GROUP BY m.food_type ORDER BY count;");
+
+    const data = {sales:sales};
+    res.json(data);
+});
+
 app.get('/api/inventory', async (req,res) => {
     inventory = await dbs.queryDatabase("SELECT * FROM inventories;");
 
@@ -84,12 +98,31 @@ app.post('/api/submit_menuItem',async (req,res) =>{
     res.end();
 });
 
+app.post('/api/add_inventory',async (req,res) =>{
+    inventory_ID = Math.floor(Math.random() * 800000000);
+
+    let sql = "INSERT INTO inventories VALUES('"+inventory_ID+"','"+req.body.name+"','"+req.body.quantity+"');";
+    await dbs.queryDatabase(sql);
+    res.end();
+});
+
 app.post('/api/update_inventory',async (req,res) =>{
     console.log(req.body);
     id = req.body.id;
     quantity = req.body.quantity;
 
     let sql = "UPDATE inventories SET inventory_quantity='"+quantity+"'WHERE inventory_id='"+id+"';"
+    await dbs.queryDatabase(sql);
+    res.end();
+
+});
+
+app.post('/api/update_menu_price',async (req,res) =>{
+    console.log(req.body);
+    id = req.body.id;
+    price = req.body.price;
+
+    let sql = "UPDATE menu_items SET price='"+price+"'WHERE item_id='"+id+"';"
     await dbs.queryDatabase(sql);
     res.end();
 
@@ -274,6 +307,8 @@ app.post('/api/sales_report', async (req,res) => {
     const data = {sales_report:value};
     res.send(JSON.stringify(data));
 });
+
+
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from '../assests/Chick-fil-A-Logo.png'
 import { Link } from "react-router-dom";
 import ReorderIcon from "@material-ui/icons/Reorder";
@@ -8,7 +8,9 @@ import "../styles/Navbar.css";
 
 function ManagerNavbar({ setManagerNav }) {
   const [openLinks, setOpenLinks] = useState(false);
-  setManagerNav(true);
+  useEffect(() => {
+      setManagerNav(true);
+  }, []);
 
   const toggleNavbar = () => {
     setOpenLinks(!openLinks);
