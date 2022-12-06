@@ -1,7 +1,7 @@
 export async function getMenuItems(){
 
     try{
-        const response = await fetch('http://localhost:5000/api/menu_items');
+        const response = await fetch('https://chickfilaserver.onrender.com/api/menu_items');
         return await response.json();
     }
     catch(error){
@@ -12,7 +12,7 @@ export async function getMenuItems(){
 export async function getSales(){
 
     try{
-        const response = await fetch('http://localhost:5000/api/sales');
+        const response = await fetch('https://chickfilaserver.onrender.com/api/sales');
         return await response.json();
     }
     catch(error){
@@ -23,7 +23,7 @@ export async function getSales(){
 export async function getBarSales(){
 
     try{
-        const response = await fetch('http://localhost:5000/api/barChartSales');
+        const response = await fetch('https://chickfilaserver.onrender.com/api/barChartSales');
         return await response.json();
     }
     catch(error){
@@ -34,7 +34,7 @@ export async function getBarSales(){
 export async function getPieSales(){
 
     try{
-        const response = await fetch('http://localhost:5000/api/pieChartSales');
+        const response = await fetch('https://chickfilaserver.onrender.com/api/pieChartSales');
         return await response.json();
     }
     catch(error){
@@ -45,7 +45,7 @@ export async function getPieSales(){
 export async function getInventoryItems(){
 
     try{
-        const response = await fetch('http://localhost:5000/api/inventory');
+        const response = await fetch('https://chickfilaserver.onrender.com/api/inventory');
         return await response.json();
     }
     catch(error){
@@ -55,7 +55,7 @@ export async function getInventoryItems(){
 
 export async function submitOrder(firstname,lastname,payment_method,order_items,total){
 
-    const response = await fetch('http://localhost:5000/api/submit_order',{
+    const response = await fetch('https://chickfilaserver.onrender.com/api/submit_order',{
         method:'POST',
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
@@ -66,7 +66,7 @@ export async function submitOrder(firstname,lastname,payment_method,order_items,
 }
 
 export async function addMenuItemQuery(item_name,quantity,price,food_type){
-    const response = await fetch('http://localhost:5000/api/submit_menuItem',{
+    const response = await fetch('https://chickfilaserver.onrender.com/api/submit_menuItem',{
         method:'POST',
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
@@ -78,7 +78,7 @@ export async function addMenuItemQuery(item_name,quantity,price,food_type){
 }
 
 export async function addInventory(name,quantity){
-    const response = await fetch('http://localhost:5000/api/add_inventory',{
+    const response = await fetch('https://chickfilaserver.onrender.com/api/add_inventory',{
         method:'POST',
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
@@ -91,7 +91,7 @@ export async function addInventory(name,quantity){
 
 
 export async function updateInventory(id,quantity){
-    const response = await fetch('http://localhost:5000/api/update_inventory',{
+    const response = await fetch('https://chickfilaserver.onrender.com/api/update_inventory',{
         method:'POST',
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
@@ -103,7 +103,7 @@ export async function updateInventory(id,quantity){
 }
 
 export async function updateMenuPrice(id,price){
-    const response = await fetch('http://localhost:5000/api/update_menu_price',{
+    const response = await fetch('https://chickfilaserver.onrender.com/api/update_menu_price',{
         method:'POST',
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
@@ -115,7 +115,7 @@ export async function updateMenuPrice(id,price){
 }
 
 export async function getSalesReport(start,end){
-    const response = await fetch('http://localhost:5000/api/sales_report',{
+    const response = await fetch('https://chickfilaserver.onrender.com/api/sales_report',{
         method:'POST',
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
@@ -127,7 +127,7 @@ export async function getSalesReport(start,end){
 }
 
 export async function getExcessReport(date){
-    const response = await fetch('http://localhost:5000/api/excess_report',{
+    const response = await fetch('https://chickfilaserver.onrender.com/api/excess_report',{
         method:'POST',
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
@@ -141,7 +141,7 @@ export async function getExcessReport(date){
 export async function getRestockReport(){
 
     try{
-        const response = await fetch('http://localhost:5000/api/restock_report');
+        const response = await fetch('https://chickfilaserver.onrender.com/api/restock_report');
         return await response.json();
     }
     catch(error){
@@ -150,7 +150,7 @@ export async function getRestockReport(){
 }
 
 export async function getSalesTog(start,end){
-    const response = await fetch('http://localhost:5000/api/sales_together',{
+    const response = await fetch('https://chickfilaserver.onrender.com/api/sales_together',{
         method:'POST',
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
@@ -163,7 +163,7 @@ export async function getSalesTog(start,end){
 
 export async function getNearbyLocations(lat,lng){
     console.log(lat);
-    const response = await fetch('http://localhost:5000/api/locations',{
+    const response = await fetch('https://chickfilaserver.onrender.com/api/locations',{
         method:'POST',
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},

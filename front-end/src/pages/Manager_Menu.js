@@ -81,8 +81,18 @@ function Manager_Menu({setManagerNav}) {
             </Col>
           </Row>
 
-          <AddMenuItemForm handleSubmit={handleSubmit}/>
-          <UpdateMenuPriceForm handleSubmit={handleSubmitUpdate}/>
+          <Row>
+            <Col>
+            <div class="dotted">
+              <AddMenuItemForm handleSubmit={handleSubmit}/>
+            </div>
+            </Col>
+          <Col>
+            <div class="dotted">
+              <UpdateMenuPriceForm handleSubmit={handleSubmitUpdate}/>
+            </div>
+          </Col>
+          </Row>
       </Container>
       </div>
     );

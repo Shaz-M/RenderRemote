@@ -127,8 +127,10 @@ function Manager({setManagerNav,managerAuth,setManagerAuth}) {
     let temp_data = [];
     getSales().then(response => {
       for(let item in response.sales){
+        if (typeof response.sales[item].sales_total_revenue !== 'undefined'){
         temp_date.push(response.sales[item].sales_date.slice(0,10));
         temp_data.push(response.sales[item].sales_total_revenue);
+        }
       }
 
       setDates(temp_date);
