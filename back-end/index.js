@@ -4,11 +4,30 @@ const { Pool } = require('pg');
 const dotenv = require('dotenv').config();
 var cors = require('cors');
 const axios = require('axios');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 
 // Create express app
 const app = express();
 const port = 5000;
+
+const swaggerOptions = {
+    swaggerDefinition:{
+        info:{
+            title:'Chick-Fil-A POS',
+            description:"Chick-Fil-A POS Documentation",
+            contact: {
+                name:"Team 53"
+            },
+            servers:["http://localhost:5000"]
+        }
+    },
+    apis: ["index.js"]
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(swaggerDocs));
 
 app.use(cors());
 app.use(express.json());
@@ -41,6 +60,15 @@ app.get('/', (req, res) => {
     res.render('index', data);
 });
 
+/**
+ * @swagger
+ * /api/menu_items:
+ *  get:
+ *      description: Use to request all menu items from database
+ *      responses:
+ *          '200':
+ *              description: A sucessful response
+ */
 app.get('/api/menu_items', async (req,res) => {
     entrees = await dbs.queryDatabase("SELECT * FROM menu_items where food_type='Entrée';");
     sides = await dbs.queryDatabase("SELECT * FROM menu_items where food_type='Side';");
@@ -51,6 +79,15 @@ app.get('/api/menu_items', async (req,res) => {
     res.json(data);
 });
 
+/**
+ * @swagger
+ * /api/sales:
+ *  get:
+ *      description: Use to request sales history from database
+ *      responses:
+ *          '200':
+ *              description: A sucessful response
+ */
 app.get('/api/sales', async (req,res) => {
     sales = await dbs.queryDatabase("SELECT * FROM sales ORDER BY sales_date;");
 
@@ -58,6 +95,15 @@ app.get('/api/sales', async (req,res) => {
     res.json(data);
 });
 
+/**
+ * @swagger
+ * /api/barChartSales:
+ *  get:
+ *      description: Use to request sales for each specific menu item
+ *      responses:
+ *          '200':
+ *              description: A sucessful response
+ */
 app.get('/api/barChartSales', async (req,res) => {
     sales = await dbs.queryDatabase("SELECT m.item_name,count(m.item_name) FROM order_menu o JOIN menu_items m ON o.item_id = m.item_id JOIN orders_cfa p ON o.order_id = p.order_id GROUP BY m.item_name ORDER BY count DESC;");
 
@@ -65,6 +111,16 @@ app.get('/api/barChartSales', async (req,res) => {
     res.json(data);
 });
 
+
+/**
+ * @swagger
+ * /api/pieChartSales:
+ *  get:
+ *      description: Use to request sales by category from database
+ *      responses:
+ *          '200':
+ *              description: A sucessful response
+ */
 app.get('/api/pieChartSales', async (req,res) => {
     sales = await dbs.queryDatabase("SELECT m.food_type,count(m.item_name) FROM order_menu o JOIN menu_items m ON o.item_id = m.item_id JOIN orders_cfa p ON o.order_id = p.order_id GROUP BY m.food_type ORDER BY count;");
 
@@ -72,6 +128,16 @@ app.get('/api/pieChartSales', async (req,res) => {
     res.json(data);
 });
 
+
+/**
+ * @swagger
+ * /api/inventory:
+ *  get:
+ *      description: Use to request all inventory items from database
+ *      responses:
+ *          '200':
+ *              description: A sucessful response
+ */
 app.get('/api/inventory', async (req,res) => {
     inventory = await dbs.queryDatabase("SELECT * FROM inventories;");
 
@@ -79,6 +145,32 @@ app.get('/api/inventory', async (req,res) => {
     res.json(data);
 });
 
+
+/**
+ *  @swagger
+ * /api/locations:
+ *   post:
+ *     description: given latitude and longitude api queries all Chick-Fil-A locations around a given radius
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: location
+ *         description: The location to query
+ *         schema:
+ *           type: object
+ *           required:
+ *             - lat
+ *             - lng
+ *           properties:
+ *             lat:
+ *               type: string
+ *             lng:
+ *               type: string
+ *     responses:
+ *          '200':
+ *              description: returns all locations from query
+ */
 app.post('/api/locations', async (req,res) => {
     lat = req.body.lat;
     lng = req.body.lng;
@@ -89,7 +181,34 @@ app.post('/api/locations', async (req,res) => {
 });
 
 
-
+/**
+ *  @swagger
+ * /api/submit_menuItem:
+ *   post:
+ *     description: Adds a menu item to database
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: Menu Item
+ *         description: The menu item object
+ *         schema:
+ *           type: object
+ *           required:
+ *             - item_name
+ *             - quantity
+ *             - price
+ *             - food_type
+ *           properties:
+ *             item_name:
+ *               type: string
+ *             quantity:
+ *               type: string
+ *             price:
+ *               type: string
+ *             food_type:
+ *               type: string
+ */
 app.post('/api/submit_menuItem',async (req,res) =>{
     item_ID = Math.floor(Math.random() * 800000000);
 
@@ -98,6 +217,28 @@ app.post('/api/submit_menuItem',async (req,res) =>{
     res.end();
 });
 
+/**
+ *  @swagger
+ * /api/add_inventory:
+ *   post:
+ *     description: Adds an inventory item to database
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: Inventory Item
+ *         description: The inventory item object
+ *         schema:
+ *           type: object
+ *           required:
+ *             - name
+ *             - quantity
+ *           properties:
+ *             name:
+ *               type: string
+ *             quantity:
+ *               type: string
+ */
 app.post('/api/add_inventory',async (req,res) =>{
     inventory_ID = Math.floor(Math.random() * 800000000);
 
@@ -106,6 +247,28 @@ app.post('/api/add_inventory',async (req,res) =>{
     res.end();
 });
 
+/**
+ *  @swagger
+ * /api/update_inventory:
+ *   post:
+ *     description: Updates quantity of inventory item
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: Inventory Item
+ *         description: The Inventory item object
+ *         schema:
+ *           type: object
+ *           required:
+ *             - id
+ *             - quantity
+ *           properties:
+ *             id:
+ *               type: string
+ *             quantity:
+ *               type: string
+ */
 app.post('/api/update_inventory',async (req,res) =>{
     console.log(req.body);
     id = req.body.id;
@@ -117,6 +280,28 @@ app.post('/api/update_inventory',async (req,res) =>{
 
 });
 
+/**
+ *  @swagger
+ * /api/update_menu_price:
+ *   post:
+ *     description: Updates the price of a menu item in the database
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: Menu Item
+ *         description: The menu item object
+ *         schema:
+ *           type: object
+ *           required:
+ *             - id
+ *             - price
+ *           properties:
+ *             id:
+ *               type: string
+ *             price:
+ *               type: string
+ */
 app.post('/api/update_menu_price',async (req,res) =>{
     console.log(req.body);
     id = req.body.id;
@@ -128,6 +313,34 @@ app.post('/api/update_menu_price',async (req,res) =>{
 
 });
 
+/**
+ *  @swagger
+ * /api/submit_order:
+ *   post:
+ *     description: Submits an order to the database and updates inventory accordingly
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: Order
+ *         description: The order object
+ *         schema:
+ *           type: object
+ *           required:
+ *             - id
+ *             - price
+ *           properties:
+ *             firstname:
+ *               type: string
+ *             lastname:
+ *               type: string
+ *             total:
+ *               type: string
+ *             payment_method:
+ *               type: string
+ *             order_items:
+ *               type: string
+ */
 app.post('/api/submit_order', async (req,res) =>{
     
     console.log("SERVER RECIEVED");
@@ -236,6 +449,15 @@ app.post('/api/submit_order', async (req,res) =>{
     
 });
 
+/**
+ * @swagger
+ * /api/restock_report:
+ *  get:
+ *      description: returns all items that need to be restocked
+ *      responses:
+ *          '200':
+ *              description: A sucessful response
+ */
 app.get('/api/restock_report', async (req,res) => {
     restock = await dbs.queryDatabase("SELECT * FROM inventories where inventory_quantity < 50;");
 
@@ -270,6 +492,28 @@ app.post('/api/sales_together', async (req,res) => {
 });
 
 
+/**
+ *  @swagger
+ * /api/excess_report:
+ *   post:
+ *     description: given a date return the item in excess since that date
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: Dates
+ *         description: The date to query
+ *         schema:
+ *           type: object
+ *           required:
+ *             - date
+ *           properties:
+ *             date:
+ *               type: string
+ *     responses:
+ *          '200':
+ *              description: returns excess report
+ */
 app.post('/api/excess_report', async (req,res) => {
     date = req.body.date;
     sql = "SELECT o.inventory_id,count(o.inventory_id) FROM items_inventories o JOIN menu_items m ON o.item_id = m.item_id JOIN order_menu t ON t.item_id = m.item_id JOIN orders_cfa p ON t.order_id = p.order_id WHERE p.order_date > '"+date+"' GROUP BY o.inventory_id;";
@@ -298,6 +542,31 @@ app.post('/api/excess_report', async (req,res) => {
     res.send(JSON.stringify(data));
 });
 
+/**
+ *  @swagger
+ * /api/sales_report:
+ *   post:
+ *     description: given two dates api returns the sales of each menu item
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: Dates
+ *         description: The dates to query
+ *         schema:
+ *           type: object
+ *           required:
+ *             - start
+ *             - end
+ *           properties:
+ *             start:
+ *               type: string
+ *             end:
+ *               type: string
+ *     responses:
+ *          '200':
+ *              description: returns sales for all menu items in the given range
+ */
 app.post('/api/sales_report', async (req,res) => {
     start = req.body.start;
     end = req.body.end;
