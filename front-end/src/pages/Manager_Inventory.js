@@ -53,7 +53,7 @@ function Manager_Inventory({setManagerNav}) {
               <table align='center'>
                 <tr>
                   <th>ID </th>
-                  <th>Name        </th>
+                  <th>Name</th>
                   <th>Left</th>
                 </tr>
               </table>  
@@ -76,9 +76,14 @@ function Manager_Inventory({setManagerNav}) {
                     )
                         
                 })}
-
-            <UpdateInvForm handleSubmit={handleSubmit} />
-            <AddInventoryForm handleSubmit={handleSubmitAdd}/>
+            <div className='Inv'>
+              <div className='updateInv'>
+                <UpdateInvForm handleSubmit={handleSubmit} />
+              </div>
+              <div className='AddInv'>
+                <AddInventoryForm handleSubmit={handleSubmitAdd}/>
+              </div>
+            </div>
 
         </div>
     )

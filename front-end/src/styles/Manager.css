@@ -66,36 +66,17 @@ p{
   text-align: center;
 }
 
-.inventory{
-    text-align: center;
-}
 
-.inventory_id{
-    padding-left: 50px;
-}
-.inventory_id_text{
-    padding-left: 50px;
-}
 
-.quantity{
-    padding-left: 50px;
-}
-
-.quantity_text{
-    padding-left: 50px;
-}
-
-.inventory_div{
-    /* width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center; */
-    
-}
 
 .menu .Title{
     color: red;
     font-size: 70px;
+}
+
+.inventory_menu .Title{
+  color: red;
+  font-size: 70px;
 }
 
 .inventory_menu{
@@ -140,6 +121,7 @@ p{
     width: 100%;
     /* height: 100vh; */
     display: flex;
+    
     /* justify-content: center; */
     /* align-items: center; */
   }
@@ -182,3 +164,114 @@ p{
     text-align: center;
     padding: 4px 32px;
   }
+
+  /* .report_form{
+    padding-left: 30%;
+  } */
+
+  .reportqueryform{
+    border: 10px dotted red;
+    padding-top: 20px;
+    margin: 0%;
+    
+  }
+ .reportquery{
+  text-align: center;
+  align-items: center;
+  
+  
+ }
+
+ .start{
+    border-radius: 10px;
+    border:0;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  
+ }
+
+ .end{
+  border-radius: 10px;
+    border:0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  
+ }
+
+ .submit_bttn_1{
+  color: red;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    justify-content: center;
+    background-color: rgb(211, 100, 100);
+    height: 30px;
+    width: 100px;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    
+ }
+
+ .end_date_word{
+  padding-top: 40px;
+ }
+
+ .Inv{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+ }
+
+ .updateInv{
+  border: 10px dotted red;
+  text-align: center;
+  align-items: center;
+  margin-right: 200px;
+  
+ }
+
+ .AddInv{
+  border: 10px dotted red;
+  text-align: center;
+  align-items: center;
+  margin-left: 200px;
+ }
+
+ .submit_bttn_inv{
+  color: red;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    justify-content: center;
+    background-color: rgb(211, 100, 100);
+    height: 30px;
+    width: 100px;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    
+ }
+
+ .inventory_id_text{
+  border-radius: 10px;
+    border:1px solid ;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+ }
+
+ .quantity_text{
+  border-radius: 10px;
+    border:1px solid ;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+ }
+
+ .item_name{
+  border-radius: 10px;
+    border:1px solid ;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+ }
+
+ .quan_name{
+  border-radius: 10px;
+    border:1px solid ;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+ }
+

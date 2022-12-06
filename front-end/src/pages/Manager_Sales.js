@@ -74,7 +74,9 @@ function Manager_Sales({setManagerNav}) {
                 <p>Given a timeframe, check the quanity sold for all products sold to customers. Input a start and end date (mm/dd/yyyy).</p>
             </center>
       </div>
-      <ReportQueryForm handleSubmit={handleSubmit} />
+      <div className='reportqueryform'>
+        <ReportQueryForm className= "report_form" handleSubmit={handleSubmit} />
+      </div>
     </div>
   )
 }

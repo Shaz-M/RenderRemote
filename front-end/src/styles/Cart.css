@@ -7,35 +7,6 @@
     src: url(../fonts/font-fil-a.ttf);
 }
 
-/* .orderform{
-    display: flex;
-    font-size: 30px;
-    padding-left: 38%;
-    border:2px solid green;
-    
-}
-.Cart{
-    display: flex;
-}
-
-.col{
-    display: flex;
-    padding-left: 0%;
-    padding-right: 10%;
-}
-
-.Order_cart{
-    font-size: 30px;
-    padding-left: 5%;
-    flex: 1;
-    border:2px solid yellow;
-
-}
-
-.Order_cart:first-child{
-    margin-left: 20px;
-    margin-right: 20px;
-} */
 
 .menuTitle_cart{
     font-size: 100px;
@@ -71,9 +42,6 @@
     
 }
 
-.submit_bttn{
-    font-size: 80px;
-}
 
 /* <!-- HTML !-->
 <button class="button-45" role="button">Button 45</button> */

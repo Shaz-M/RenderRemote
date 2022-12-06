@@ -2,13 +2,14 @@ import { borderRadius } from "@mui/system";
 import React from "react";
 import '../styles/Cart.css';
 
+
 function OrderForm({handleSubmit}){
     return (
         <form onSubmit={handleSubmit}>
             <label for="fname" className="col">First name:</label><br/>
             <input type="text" id="fname" name="fname" className="fname"/><br/>
 
-            <label for="lname" className="col">Last name:</label><br/>
+            <label for="lname" className="col" >Last name:</label><br/>
             <input type="text" id="lname" name="lname" className="lname"/><br/>
 
             <input type="radio" id="card" name="payment_type" value="card"/>
