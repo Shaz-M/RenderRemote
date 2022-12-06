@@ -18,6 +18,7 @@ import Manager_Excess from './pages/Manager_Excess';
 import Manager_Restock from './pages/Manager_Restock';
 import Manager_SalesTog from './pages/Manager_SalesTog';
 import Locations from './pages/Locations';
+import About from './pages/About';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import jwt_decode from "jwt-decode"
 import { Navigate } from "react-router-dom";
@@ -87,6 +88,7 @@ function App() {
       <Route path='/menu/drinks' exact element={show? (<Menu_Drink handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} setCart={setCart}/>)} />
       <Route path='/menu/condiments' exact element={show? (<Menu_Condiments handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} setCart={setCart} />)} />
       <Route path='/locations' exact element={<Locations />} />
+      <Route path='/about' exact element={<About />} />
 
 
 
