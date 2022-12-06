@@ -19,7 +19,7 @@ function AddMenuItemForm({handleSubmit}){
             <label for="side">Side</label><br/>
             <input type="radio" id="condiment" name="food_type" value="Condiment"/>
             <label for="condiment">Condiment</label><br/>
-            <input type="submit" value="Submit"></input>
+            <input type="submit" value="Submit" className="submit_bttn_inv"></input>
         </form>
     );
 }
