@@ -3,6 +3,8 @@ import Logo from '../assests/Chick-fil-A-Logo.png'
 import { Link } from "react-router-dom";
 import ReorderIcon from "@material-ui/icons/Reorder";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Dropdown from 'react-bootstrap/Dropdown';
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 import "../styles/Navbar.css";
 
@@ -19,12 +21,14 @@ function ManagerNavbar({ setManagerNav }) {
     <div className="navbar">
       <div className="leftSide" id={openLinks ? "open" : "close"}>
         <img src={Logo} />
-        <div className="hiddenLinks">
-          <Link to="/manager"> Home </Link>
-          <Link to="/sales"> Menu </Link>
-          <Link to="/inventory"> About </Link>
-          <Link to="/excess"> Contact </Link>
-        </div>
+        <NavDropdown
+              id="nav-dropdown-dark-example"
+              title="Change View"
+              menuVariant="dark"
+            >      <Dropdown.Item className="dropItem" href="/">Customer</Dropdown.Item>
+      <Dropdown.Item className="dropItem" href="#/action-2">Server</Dropdown.Item>
+      <Dropdown.Item className="dropItem" as={Link} to="/manager">Manager</Dropdown.Item>
+      </NavDropdown>
       </div>
       <div className="rightSide">
         <Link to="/manager"> Home </Link>

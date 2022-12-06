@@ -32,7 +32,7 @@
     margin-right: 10px;
   }
   
-  .navbar a {
+  .navbar .rightSide a {
     color: white;
     text-decoration: none;
     margin: 20px;
@@ -113,3 +113,7 @@
     color: white;
 
   }
+
+#nav-dropdown-dark-example{
+  color:rgb(233, 167, 167);
+}
