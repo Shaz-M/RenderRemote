@@ -1,0 +1,33 @@
+.addcart{
+    color: red;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgb(38, 46, 38);
+    height: auto;
+    width: auto;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    align-items: center;
+    
+}
+
+.removecart{
+    color: red;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgb(53, 24, 24);
+    height: auto;
+    width: auto;
+    color: white;
+    font-size: 18px;
+    align-items: center;
+    
+    
+}
+
+.carts{
+    align-items: center;
+}
