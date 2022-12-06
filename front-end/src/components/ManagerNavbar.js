@@ -8,7 +8,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 
 import "../styles/Navbar.css";
 
-function ManagerNavbar({ setManagerNav }) {
+function ManagerNavbar({ setManagerNav, setServer }) {
   const [openLinks, setOpenLinks] = useState(false);
   useEffect(() => {
       setManagerNav(true);
@@ -26,7 +26,7 @@ function ManagerNavbar({ setManagerNav }) {
               title="Change View"
               menuVariant="dark"
             >      <Dropdown.Item className="dropItem" href="/">Customer</Dropdown.Item>
-      <Dropdown.Item className="dropItem" href="#/action-2">Server</Dropdown.Item>
+      <Dropdown.Item onClick={() => {setServer(true);setManagerNav(false)}} as={Link} className="dropItem" to="/menu">Server</Dropdown.Item>
       <Dropdown.Item className="dropItem" as={Link} to="/manager">Manager</Dropdown.Item>
       </NavDropdown>
       </div>

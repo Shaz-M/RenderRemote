@@ -12,7 +12,7 @@ import '../styles/Menu.css';
 function myfunction() {
   console.log("CLICKED");
 }
-function Menu({handleClick}) {
+function Menu({handleClick,server,serverAuth,setServerAuth}) {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
@@ -21,6 +21,37 @@ function Menu({handleClick}) {
   })
 
   },[])
+
+  function handleCallbackResponse(response){
+    setServerAuth(true);
+    console.log("User Authenicated");
+    //document.getElementById("signInDiv").hidden = true;
+    //console.log("Encoded JWT ID token: ",response.credential);
+    const boxes = document.querySelectorAll('.S9gUrf-YoZ4jf');
+      console.log(boxes);
+    boxes.forEach(box => {
+      box.remove();
+    });
+  }
+
+  useEffect(() => {
+
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:"282294513169-1ftcl7oqtbdb40cbk5a7sug7uua1jdn9.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      { theme: "outline", size: "large"}
+    );
+
+  },[serverAuth])
+
+  if(server && !serverAuth){
+    return (<div id="signInDiv"></div>)
+  }
 
 
   if(menuItems.length!==0){

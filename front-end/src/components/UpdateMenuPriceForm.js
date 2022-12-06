@@ -10,7 +10,7 @@ function UpdateMenuPriceForm({handleSubmit}){
 
             <label for="price" className="price">New Price:</label><br/>
             <input type="text" id="price" name="price" className="price_text"/><br/> 
-            <input type="submit" value="Submit"></input>
+            <input type="submit" value="Submit" className="submit_bttn_inv"></input>
         </form>
     );
 }

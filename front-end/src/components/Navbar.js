@@ -9,7 +9,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import NavDropdown from 'react-bootstrap/NavDropdown'
 // import Dropdown from './Dropdown'
 
-function Navbar({ setShow, size }) {
+function Navbar({ setShow, size, setServer, server}) {
   const [click, setClick]  = useState(false);
   const [openLinks, setOpenLinks] = useState(false);
 
@@ -25,11 +25,12 @@ function Navbar({ setShow, size }) {
               title="Change View"
               menuVariant="dark"
             >      <Dropdown.Item className="dropItem" href="/">Customer</Dropdown.Item>
-      <Dropdown.Item className="dropItem" href="#/action-2">Server</Dropdown.Item>
+      <Dropdown.Item as={Link} onClick={() => setServer(true)} className="dropItem" to="/menu">Server</Dropdown.Item>
       <Dropdown.Item className="dropItem" as={Link} to="/manager">Manager</Dropdown.Item>
       </NavDropdown>
       </div>
-      <div className="rightSide">
+      {!server? 
+      (<div className="rightSide">
         <Link to="/"> Home </Link>
         <Link to="/menu" onClick={() => setShow(true)}> Menu </Link>
         <Link to="/about"> About </Link>
@@ -40,7 +41,17 @@ function Navbar({ setShow, size }) {
         
           <ReorderIcon />
         </button>
+      </div>):
+      (
+        <div className="rightSide">
+        <Link to="/menu" onClick={() => setShow(true)}> Menu </Link>
+        <div className="cart" onClick={() => setShow(false)}><img src={Cart} /> Cart - {size}</div>
+        <button onClick={toggleNavbar}>
+        
+          <ReorderIcon />
+        </button>
       </div>
+      )}
     </div>
   );
 }

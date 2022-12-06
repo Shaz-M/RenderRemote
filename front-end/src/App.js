@@ -30,6 +30,17 @@ function App() {
   const [cart, setCart] = useState([]);
   const [managerNav, setManagerNav] = useState(false);
   const [managerAuth, setManagerAuth] = useState(false);
+  const [server, setServer] = useState(false);
+  const [serverAuth, setServerAuth] = useState(false);
+
+
+  useEffect(() => {
+    console.log("HERE");
+    if(server && !serverAuth){
+      console.log("SET")
+      setShow(true)}
+  }, [server,serverAuth,show])
+
 
   
 
@@ -60,7 +71,7 @@ function App() {
 
   return <div className="App">
     <Router>
-      {managerNav?(<ManagerNavbar setManagerNav={setManagerNav}/>) :(<Navbar setShow={setShow} size={cart.length}/>)}
+      {managerNav?(<ManagerNavbar setServer={setServer} setManagerNav={setManagerNav}/>) :(<Navbar server={server} setServer={setServer} setShow={setShow} size={cart.length}/>)}
     <Routes>
       <Route path='/' exact element={<Home />} />
       <Route path='/manager' exact element={<Manager managerAuth={managerAuth} setManagerAuth={setManagerAuth} setManagerNav={setManagerNav} />} />
@@ -70,7 +81,7 @@ function App() {
       <Route path='/manager/excess' exact element={managerAuth? (<Manager_Excess setManagerNav={setManagerNav} />) :(<Navigate to="/Manager"/>)}/>
       <Route path='/manager/restock' exact element={managerAuth? (<Manager_Restock setManagerNav={setManagerNav} />):(<Navigate to="/Manager"/>)} />
       <Route path='/manager/sales_together' exact element={managerAuth? (<Manager_SalesTog setManagerNav={setManagerNav} />):(<Navigate to="/Manager"/>)} />
-      <Route path='/menu' exact element={show? (<Menu handleClick={handleClick}/>):(<Cart cart={cart} />)} />
+      <Route path='/menu' exact element={show? (<Menu serverAuth={serverAuth} setServerAuth={setServerAuth} server={server} handleClick={handleClick}/>):(<Cart cart={cart} />)} />
       <Route path='/menu/entrees' exact element={show? (<Menu_Entrees handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} setCart={setCart}/>)} />
       <Route path='/menu/side' exact element={show? (<Menu_Side handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} setCart={setCart}/>)} />
       <Route path='/menu/drinks' exact element={show? (<Menu_Drink handleClick={handleClick} remove={remove} countItem={countItem} cart={cart}/>):(<Cart cart={cart} setCart={setCart}/>)} />
