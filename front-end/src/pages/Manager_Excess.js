@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect,useState } from "react";
 import { getExcessReport } from '../services/menuService';
+import '../styles/Manager.css';
 
 
 function Manager_Excess({setManagerNav}) {
@@ -28,11 +29,32 @@ function Manager_Excess({setManagerNav}) {
                 </center>
             </div>
 
+            <div className='inventory_menu'>
+                <table align='center'>
+                    <tr>
+                    <th>Total Sold </th>
+                    <th>Name  </th>
+                    <th>Current Quantity</th>
+                    </tr>
+                </table>
+            </div>
+
             {excess.excess_report.map((item,index) => {
                 
                     return (
-                        <div key={index}>                    
-                            <div>{item.item_name} | {item.total_sold} | {item.current_quantity} </div>
+                        <div key={index}>    
+                        {                
+                        //<div>{item.item_name} | {item.total_sold} | {item.current_quantity} </div>
+                        }
+                            <div className='map_inventory'>
+                                <table align='center'>
+                                    <tr>
+                                        <td className='sold'>{item.total_sold}</td>
+                                        <td className='name'>{item.item_name}</td>
+                                        <td className='quantity'>{item.current_quantity}</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                             )
                         
@@ -43,7 +65,7 @@ function Manager_Excess({setManagerNav}) {
                     <label for="date">Start Date:</label><br/>
                     <input type="text" id="date" name="date" placeholder="YYYY-MM-DD"/><br/>
                     <input type="submit" value="Submit"></input>
-                </form>
+                    </form>
             </div>
             
         </div>
@@ -60,8 +82,6 @@ function Manager_Excess({setManagerNav}) {
                     Items in Excess
                 </center>
             </div>
-            Format: <br/>
-            Item Name | Total Sold | Current Quantity <br/><br/>
 
             <label for="date">Start Date:</label><br/>
             <input type="text" id="date" name="date" placeholder="YYYY-MM-DD"/><br/>
