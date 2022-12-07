@@ -78,9 +78,11 @@ function Manager_Inventory({setManagerNav}) {
                 })}
             <div className='Inv'>
               <div className='updateInv'>
+                <p> Update Inventory Item </p>
                 <UpdateInvForm handleSubmit={handleSubmit} />
               </div>
               <div className='AddInv'>
+                <p> Add Inventory Item </p>
                 <AddInventoryForm handleSubmit={handleSubmitAdd}/>
               </div>
             </div>
